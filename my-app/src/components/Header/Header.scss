@@ -1,0 +1,90 @@
+@import '../../styles/variables.scss';
+
+.header {
+  position: fixed;
+  width: 100%;
+  height: 30px;
+  top: 52px;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // grid-column: 1 / span 12;
+  padding-left: 25px;
+  padding-right: 25px;
+
+  .header__logo {
+    height: 30px;
+  }
+
+  .header__nav {
+    width: 706px;
+    height: 18px;
+    @media (max-width: 1190px) {
+      width: 600px;
+    }
+    .gamburger {
+      display: none;
+    }
+
+    .header_navaigator {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: $color-text;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 14.63px;
+      text-transform: uppercase;
+
+      @media (max-width: 1190px) {
+        font-size: 10px;
+      }
+
+      @media (max-width: 1024px) {
+        display: none;
+      }
+      li:hover {
+        color: $color-hover;
+        transition: color 0.3s ease;
+        cursor: pointer;
+      }
+
+      li:nth-child(1) {
+        display: flex;
+        align-items: center;
+        .header__img {
+          width: 18px;
+          height: 18px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .header__info {
+    width: 155px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    svg:hover {
+      fill: $color-hover;
+      cursor: pointer;
+
+      path {
+        transition: fill 0.3s ease; // добавляем плавный переход
+      }
+
+      &:hover path {
+        fill: $color-hover;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+}
