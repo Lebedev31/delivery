@@ -2,15 +2,22 @@ import './Header.scss';
 import logo from '../../img/Logo.png';
 import fire from '../../img/image 9.png';
 import Hamburger from './Hamburger';
+import TabletMenu from '../TabletMenu/TabletMenu';
+import { useState } from 'react';
 
 function Header() {
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleMenu = () => {
+    setIsActive(!isActive);
+  };
   return (
     <header className="header">
       <div className="header__logo">
         <img src={logo} alt="логотип" />
       </div>
       <nav className="header__nav">
-        <Hamburger />
+        <Hamburger isActive={isActive} toggleMenu={toggleMenu} />
         <ul className="header_navaigator">
           <li>
             Акции
@@ -92,6 +99,8 @@ function Header() {
           </svg>
         </div>
       </div>
+
+      <TabletMenu isActive={isActive} />
     </header>
   );
 }
