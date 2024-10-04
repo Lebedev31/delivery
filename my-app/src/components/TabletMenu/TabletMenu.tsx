@@ -1,5 +1,13 @@
 import './TabletMenu.scss';
 import fire from '../../img/image 9.png';
+import img1 from '../../img/горячие блюда.png';
+import img2 from '../../img/супы.png';
+import img3 from '../../img/хинкали.png';
+import img4 from '../../img/холодные закуски.png';
+import img5 from '../../img/салаты.png';
+import img6 from '../../img/image 26.png';
+import img7 from '../../img/десерты.png';
+import img8 from '../../img/напитки.png';
 
 function TabletMenu({ isActive }: { isActive: boolean }) {
   return (
@@ -13,10 +21,85 @@ function TabletMenu({ isActive }: { isActive: boolean }) {
               <img src={fire} alt="огонь" />
             </div>
           </div>
-          <p style={{ marginTop: '70px' }}>20%</p>
+          <p>20%</p>
         </div>
-        <div></div>
-        <div></div>
+
+        <nav className="menu__nav">
+          <h3 className="menu__title">Горячее</h3>
+          <div className="menu__hot">
+            <div className="menu__hot-item">
+              <div className="menu__hot-img">
+                <img src={img1} alt="еда" />
+              </div>
+              <p className="menu__hot-name">Горячие блюда</p>
+            </div>
+
+            <div className="menu__hot-item">
+              <div className="menu__hot-img">
+                <img src={img2} alt="еда" />
+              </div>
+              <p className="menu__hot-name">Супы</p>
+            </div>
+
+            <div className="menu__hot-item">
+              <div className="menu__hot-img">
+                <img src={img3} alt="еда" />
+              </div>
+              <p className="menu__hot-name">Хинкали</p>
+            </div>
+          </div>
+
+          <h3 className="menu__title" style={{ width: '185px' }}>
+            Холодное
+          </h3>
+          <div className="menu__hot">
+            <div className="menu__hot-item">
+              <div className="menu__hot-img">
+                <img src={img4} alt="еда" />
+              </div>
+              <p className="menu__hot-name">Холодные закуски</p>
+            </div>
+
+            <div className="menu__hot-item">
+              <div className="menu__hot-img">
+                <img src={img5} alt="еда" />
+              </div>
+              <p className="menu__hot-name">Салаты</p>
+            </div>
+
+            <div className="menu__hot-item">
+              <div className="menu__hot-img">
+                <img src={img1} alt="еда" />
+              </div>
+              <p className="menu__hot-name">Соусы</p>
+            </div>
+          </div>
+        </nav>
+
+        <nav className="menu__nav" style={{ marginTop: '47px' }}>
+          <div className="menu__hot">
+            <div className="menu__hot-item">
+              <div className="menu__hot-img">
+                <img src={img7} alt="еда" />
+              </div>
+              <p className="menu__hot-name">Свежая выпечка</p>
+            </div>
+
+            <div className="menu__hot-item">
+              <div className="menu__hot-img">
+                <img src={img7} alt="еда" />
+              </div>
+              <p className="menu__hot-name">Десерты</p>
+            </div>
+
+            <div className="menu__hot-item">
+              <div className="menu__hot-img">
+                <img src={img7} alt="еда" />
+              </div>
+              <p className="menu__hot-name">Напитки</p>
+            </div>
+          </div>
+        </nav>
       </div>
     </div>
   );
