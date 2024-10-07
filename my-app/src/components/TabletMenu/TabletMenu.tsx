@@ -5,18 +5,19 @@ import img2 from '../../img/супы.png';
 import img3 from '../../img/хинкали.png';
 import img4 from '../../img/холодные закуски.png';
 import img5 from '../../img/салаты.png';
-import img6 from '../../img/image 26.png';
 import img7 from '../../img/десерты.png';
-import img8 from '../../img/напитки.png';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
-function TabletMenu({ isActive }: { isActive: boolean }) {
+function TabletMenu() {
+  const active = useSelector((state: RootState) => state.main.isActive);
   return (
-    <div className={`menu ${isActive ? 'active' : ''}`}>
+    <div className={`menu ${active ? 'active' : ''}`}>
       <div className="menu__main">
         <div className="menu__promotion">
           <p>30%</p>
           <div className="menu__img">
-            Акции
+            <span>Акции</span>
             <div className="menu__fire">
               <img src={fire} alt="огонь" />
             </div>

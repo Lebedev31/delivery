@@ -12,6 +12,31 @@
   padding-left: 25px;
   padding-right: 25px;
 
+  .header__search {
+    position: absolute;
+    width: 92%;
+    z-index: 24;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 60px;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    opacity: 0;
+    svg {
+      position: absolute;
+      top: 9px;
+      right: 9px;
+    }
+  }
+
+  @media (max-width: 550px) {
+    .header__active {
+      visibility: visible;
+      transition: all 0.5s ease;
+      opacity: 1;
+    }
+  }
+
   .header__logo {
     height: 30px;
     img {
