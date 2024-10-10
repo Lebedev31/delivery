@@ -8,9 +8,13 @@ import img5 from '../../img/салаты.png';
 import img7 from '../../img/десерты.png';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import PhoneMenu from './PhoneMenu';
+import { useMediaQuery } from '@mui/material';
 
 function TabletMenu() {
   const active = useSelector((state: RootState) => state.main.isActive);
+  const media = useMediaQuery('(min-width: 450px)');
+
   return (
     <div className={`menu ${active ? 'active' : ''}`}>
       <div className="menu__main">
@@ -24,59 +28,61 @@ function TabletMenu() {
           </div>
           <p>20%</p>
         </div>
-
         <nav className="menu__nav">
-          <h3 className="menu__title">Горячее</h3>
-          <div className="menu__hot">
-            <div className="menu__hot-item">
-              <div className="menu__hot-img">
-                <img src={img1} alt="еда" />
+          <hr />
+          <PhoneMenu text={'Горячее'}>
+            {media ? <h3 className="menu__title">{'Горячее'}</h3> : null}
+            <div className="menu__hot">
+              <div className="menu__hot-item">
+                <div className="menu__hot-img">
+                  <img src={img1} alt="еда" />
+                </div>
+                <p className="menu__hot-name">Горячие блюда</p>
               </div>
-              <p className="menu__hot-name">Горячие блюда</p>
-            </div>
 
-            <div className="menu__hot-item">
-              <div className="menu__hot-img">
-                <img src={img2} alt="еда" />
+              <div className="menu__hot-item">
+                <div className="menu__hot-img">
+                  <img src={img2} alt="еда" />
+                </div>
+                <p className="menu__hot-name">Супы</p>
               </div>
-              <p className="menu__hot-name">Супы</p>
-            </div>
 
-            <div className="menu__hot-item">
-              <div className="menu__hot-img">
-                <img src={img3} alt="еда" />
+              <div className="menu__hot-item">
+                <div className="menu__hot-img">
+                  <img src={img3} alt="еда" />
+                </div>
+                <p className="menu__hot-name">Хинкали</p>
               </div>
-              <p className="menu__hot-name">Хинкали</p>
             </div>
-          </div>
+          </PhoneMenu>
+          <hr />
+          <PhoneMenu text={'Холодное'}>
+            {media ? <h3 className="menu__title">{'Холодное'}</h3> : null}
+            <div className="menu__hot">
+              <div className="menu__hot-item">
+                <div className="menu__hot-img">
+                  <img src={img4} alt="еда" />
+                </div>
+                <p className="menu__hot-name">Холодные закуски</p>
+              </div>
 
-          <h3 className="menu__title" style={{ width: '185px' }}>
-            Холодное
-          </h3>
-          <div className="menu__hot">
-            <div className="menu__hot-item">
-              <div className="menu__hot-img">
-                <img src={img4} alt="еда" />
+              <div className="menu__hot-item">
+                <div className="menu__hot-img">
+                  <img src={img5} alt="еда" />
+                </div>
+                <p className="menu__hot-name">Салаты</p>
               </div>
-              <p className="menu__hot-name">Холодные закуски</p>
-            </div>
 
-            <div className="menu__hot-item">
-              <div className="menu__hot-img">
-                <img src={img5} alt="еда" />
+              <div className="menu__hot-item">
+                <div className="menu__hot-img">
+                  <img src={img1} alt="еда" />
+                </div>
+                <p className="menu__hot-name">Соусы</p>
               </div>
-              <p className="menu__hot-name">Салаты</p>
             </div>
-
-            <div className="menu__hot-item">
-              <div className="menu__hot-img">
-                <img src={img1} alt="еда" />
-              </div>
-              <p className="menu__hot-name">Соусы</p>
-            </div>
-          </div>
+          </PhoneMenu>
+          <hr />
         </nav>
-
         <nav className="menu__nav" style={{ marginTop: '47px' }}>
           <div className="menu__hot">
             <div className="menu__hot-item">
@@ -85,14 +91,12 @@ function TabletMenu() {
               </div>
               <p className="menu__hot-name">Свежая выпечка</p>
             </div>
-
             <div className="menu__hot-item">
               <div className="menu__hot-img">
                 <img src={img7} alt="еда" />
               </div>
               <p className="menu__hot-name">Десерты</p>
             </div>
-
             <div className="menu__hot-item">
               <div className="menu__hot-img">
                 <img src={img7} alt="еда" />

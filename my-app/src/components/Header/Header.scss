@@ -1,5 +1,9 @@
 @import '../../styles/variables.scss';
 
+.header__active {
+  background-color: rgb(1, 5, 12) !important;
+}
+
 .header {
   position: fixed;
   width: 100%;
@@ -11,16 +15,17 @@
   align-items: center;
   padding-left: 25px;
   padding-right: 25px;
+  z-index: 1000;
+  background-color: rgb(6, 36, 85);
 
   .header__search {
     position: absolute;
     width: 92%;
-    z-index: 24;
     left: 50%;
     transform: translateX(-50%);
-    top: 60px;
+    top: 35px;
     visibility: hidden;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
     opacity: 0;
     svg {
       position: absolute;
@@ -34,6 +39,7 @@
       visibility: visible;
       transition: all 0.5s ease;
       opacity: 1;
+      z-index: 50;
     }
   }
 

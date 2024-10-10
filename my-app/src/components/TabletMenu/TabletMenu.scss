@@ -7,7 +7,7 @@
   .menu {
     position: fixed;
     display: block;
-    top: 110px;
+    top: 84px;
     background-color: rgba(0, 0, 0, 0.8);
     width: 100%;
     height: 100vh;
@@ -17,7 +17,20 @@
     visibility: hidden;
     opacity: 0;
     transition: all 0.5s ease;
-    overflow: hidden;
+    overflow-y: auto;
+  }
+
+  hr {
+    width: 100%;
+    border: 1px solid rgb(61, 61, 61); // Remove default border
+    display: none;
+    margin: 0; // Remove default margins
+    padding: 0; // Ensure no padding
+
+    @media (max-width: 450px) {
+      display: block;
+      margin-bottom: 2px;
+    }
   }
 
   .active {
@@ -58,13 +71,28 @@
         grid-column: 2 / 3;
       }
     }
+
+    @media (max-width: 450px) {
+      grid-template-columns: 1fr;
+
+      & > :nth-child(2) {
+        grid-column: 1 / 1;
+      }
+
+      & > :nth-child(3) {
+        padding-top: 7px;
+        grid-column: 1 / 1;
+      }
+
+      height: 400px;
+    }
     .menu__promotion {
       margin-top: 8px;
       width: 195px;
       height: 291px;
       background: rgba(183, 0, 0, 1);
       padding: 16px 20px;
-      text-align: center; /* Центрируем текст по горизонтали */
+      text-align: center;
       @media (max-width: 768px) {
         height: 89px;
         width: 100%;
@@ -75,6 +103,21 @@
 
       @media (max-width: 450px) {
         visibility: hidden;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-left: 0px;
+        margin-left: 20%;
+        p {
+          display: none;
+        }
+      }
+
+      @media (max-width: 360px) {
+        margin-left: 21%;
+      }
+
+      @media (max-width: 300px) {
+        margin-left: 12%;
       }
       .menu__img {
         display: flex;
@@ -96,10 +139,9 @@
 
         @media (max-width: 450px) {
           visibility: visible;
-          font-size: 14px;
-          gap: 25px;
-          margin-right: 78px;
-
+          font-size: 17px;
+          gap: 23px;
+          text-transform: none;
           span {
             order: 1;
           }
@@ -108,6 +150,10 @@
             height: 30px;
             order: 0;
           }
+        }
+
+        @media (max-width: 300px) {
+          gap: 18px;
         }
       }
 
@@ -125,6 +171,23 @@
       text-align: center;
       justify-content: space-between;
 
+      @media (max-width: 450px) {
+        height: auto;
+
+        & + .menu__nav {
+          height: 235px;
+          margin-top: 10px;
+          padding-left: 14px;
+        }
+      }
+      .menu__accordionSummary {
+        flex-direction: row-reverse;
+        margin-left: 17%;
+        @media (max-width: 300px) {
+          margin-left: 6%;
+        }
+      }
+
       .menu__title {
         width: 173px;
         font-size: 13px;
@@ -134,12 +197,31 @@
         color: rgba(153, 153, 153, 1);
         text-transform: uppercase;
         text-align: right;
+
+        @media (max-width: 450px) {
+          text-align: left;
+          width: 100%;
+          margin-left: 10%;
+        }
+
+        @media (max-width: 300px) {
+          margin-left: 11%;
+        }
       }
 
       .menu__hot {
         height: 235px;
         width: 100%;
         display: grid;
+        @media (max-width: 450px) {
+          margin-left: 17%;
+          height: 135px;
+        }
+
+        @media (max-width: 300px) {
+          margin-left: 10px;
+        }
+
         .menu__hot-item {
           height: 67px;
           display: flex;
@@ -148,12 +230,22 @@
           @media (max-width: 550px) {
             gap: 15px;
           }
+
+          @media (max-width: 450px) {
+            height: 39px;
+          }
+
           .menu__hot-img {
             width: 67px;
             height: 67px;
             img {
               @include imgWidthHeight;
               object-fit: cover;
+            }
+
+            @media (max-width: 450px) {
+              width: 39px;
+              height: 39px;
             }
           }
 
@@ -162,6 +254,10 @@
             line-height: 24.38px;
             color: $color-text;
             cursor: pointer;
+
+            @media (max-width: 450px) {
+              font-size: 17px;
+            }
           }
         }
       }

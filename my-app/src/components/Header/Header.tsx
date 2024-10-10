@@ -10,7 +10,7 @@ import { RootState } from '../../redux/store';
 function Header() {
   const active = useSelector((state: RootState) => state.main.isActive);
   return (
-    <header className="header">
+    <header className={`header ${active ? 'header__active' : ''}`}>
       <div className="header__logo">
         <img src={logo} alt="логотип" />
       </div>
