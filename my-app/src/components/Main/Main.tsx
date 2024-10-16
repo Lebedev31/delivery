@@ -1,36 +1,44 @@
-import './Main.scss';
-import Abstraction from './Svg';
-import { Box } from '@mui/material';
-import { useEffect, useState } from 'react';
+import "./Main.scss";
+import {Abstraction, Abstraction2, Basket} from "./Svg";
+import { Box } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useGetAllQuery } from "../../redux/apiSliderSlice";
+import { Slider } from "../../redux/types";
 
 function Main() {
-  const slides = [
-    { id: 1, content: 'Slide 1', background: 'lightblue' },
-    { id: 2, content: 'Slide 2', background: 'lightgreen' },
-    { id: 3, content: 'Slide 3', background: 'lightcoral' },
-  ];
-
+  const { data, isLoading } = useGetAllQuery();
   const [show, setShow] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [dataArray, setDataArray] = useState<Slider[]>([]);
+  const baseUrl = "http://localhost:8080/";
+
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setShow(false);
-      setCurrentSlide((prevSlide) => {
-        if (prevSlide === slides.length - 1) {
-          setShow(true);
-          return 0;
-        } else {
-          setShow(true);
-          return prevSlide + 1;
-        }
-      });
-    }, 3000);
+    if (data && !isLoading) {
+      setDataArray(data.data);
+    }
+  }, [data]);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  useEffect(() => {
+    if (dataArray.length !== 0) {
+      const interval = setInterval(() => {
+        setCurrentSlide((prevSlide) => {
+          setShow(false);
+          if (prevSlide === dataArray.length - 1) {
+            setShow(true);
+            return 0;
+          } else {
+            setShow(true);
+            return prevSlide + 1;
+          }
+        });
+      }, 3000);
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [dataArray]);
 
   return (
     <section className="main">
@@ -49,22 +57,36 @@ function Main() {
         </div>
       </aside>
       <Box className="main__slider">
-        {slides.map((item, index) => {
+        {dataArray.map((item, index) => {
           return (
             <div
               key={index}
-              className={`main__slider-box ${show && index === currentSlide ? 'active-slider' : ''}`}
+              className={`main__slider-box ${show && index === currentSlide ? "active-slider" : ""}`}
             >
               <Box
                 className="main__slider-item"
-                sx={{ backgroundColor: item.background }}
+                sx={{ background: `url(${baseUrl + item.imgPath})` }}
               >
-                {item.content}
               </Box>
             </div>
           );
         })}
       </Box>
+      <div className="main__red-box">
+          <h3>{dataArray.length > 0 ? dataArray[currentSlide].title: ''}</h3>
+          <p className="main__weight">{dataArray.length > 0 ? dataArray[currentSlide].weight: '' }г</p>
+          <p className="main__description">{dataArray.length > 0 ? dataArray[currentSlide].description : ''}</p>
+          <div className="main__price">
+            <h3>{dataArray.length > 0 ? dataArray[currentSlide].price + ' ₽': ''}</h3>
+            <div className="main__basket">
+                <Basket/>
+            </div>
+          </div>
+      </div>
+
+      <div className="main__abstraction2">
+        <Abstraction2/>
+      </div>
     </section>
   );
 }
