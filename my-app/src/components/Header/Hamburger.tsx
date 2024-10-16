@@ -8,17 +8,12 @@ function Hamburger() {
   const dispatch: AppDispatch = useDispatch();
   return (
     <div className={`wrapper__gamburger ${active ? 'active__wrapper' : ''}`}>
-      <div
-        className={`gamburger ${active ? 'active' : ''}`}
-        onClick={() => dispatch(setActive())}
-      >
+      <div className={`gamburger ${active ? 'active' : ''}`} onClick={() => dispatch(setActive())}>
         <span></span>
         <span></span>
         <span></span>
       </div>
-      <div className={active ? 'gamburger__text-yeloy' : ''}>
-        {active ? 'Закрыть' : 'Меню'}
-      </div>
+      <div className={active ? 'gamburger__text-yeloy' : ''}>{active ? 'Закрыть' : 'Меню'}</div>
     </div>
   );
 }
