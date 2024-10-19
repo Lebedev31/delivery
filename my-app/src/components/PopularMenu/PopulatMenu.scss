@@ -1,0 +1,13 @@
+@import "../../styles/variables.scss";
+.popular {
+  margin-top: 250px;
+  font-size: 80px;
+  line-height: 90px;
+  color: $color-text;
+  .popular__block {
+    width: 100%;
+    min-height: 920px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

@@ -6,9 +6,17 @@ import TabletMenu from '../TabletMenu/TabletMenu';
 import InputComponent from '../InputComponent/InputComponent';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import img1 from '../../img/галочка.png';
+import AddinationalMenu from './AddinationalMenu';
+import { useState } from 'react';
 
 function Header() {
   const active = useSelector((state: RootState) => state.main.isActive);
+  const [activeMenuHot, setActiveMenuHot] = useState(false);
+  const [activeMenuCold, setActiveMenuCold] = useState(false);
+
+  const categoryArray1 = ['Горячие блюда', 'Супы', 'Хинкали'];
+  const categoryArray2 = ['Холодные закуски', 'Салаты', 'Соусы'];
   return (
     <header className={`header ${active ? 'header__active' : ''}`}>
       <div className='header__logo'>
@@ -23,8 +31,20 @@ function Header() {
               <img src={fire} alt='огонь' />
             </div>
           </li>
-          <li>Горячее</li>
-          <li>Холодное</li>
+          <li className='header__additional-menu' 
+              onMouseEnter={()=> setActiveMenuHot(true)} 
+              onMouseLeave={()=> setActiveMenuHot(false)}>
+             Горячее 
+            <img src={img1} alt="галочка" />
+            <AddinationalMenu categoryArray={categoryArray1} activeMenu={activeMenuHot}/>
+          </li>
+          <li className='header__additional-menu'
+            onMouseEnter={()=> setActiveMenuCold(true)} 
+            onMouseLeave={()=> setActiveMenuCold(false)}>
+            Холодное
+            <img src={img1} alt="галочка" />
+            <AddinationalMenu categoryArray={categoryArray2} activeMenu={activeMenuCold}/>
+          </li>
           <li>Свежая выпечка</li>
           <li>Десерты</li>
           <li>Напитки</li>

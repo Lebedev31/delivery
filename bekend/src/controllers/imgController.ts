@@ -1,13 +1,14 @@
 import BaseController from "./baseController";
 import { Response, Request, NextFunction } from "express";
-import { SliderServices } from "../services/sliderServices";
+import { SliderServices } from "../services/imgServices";
+import SliderShema from "../models/SliderShema";
 
 export class ImgController<
-  ISliderCollection,
+  ISliderCollection
 > extends BaseController<ISliderCollection> {
   async read(req: Request, res: Response, next?: NextFunction): Promise<void> {
     try {
-      const sliderServices = new SliderServices<ISliderCollection>();
+      const sliderServices = new SliderServices(SliderShema);
       const collection = await sliderServices.getAll();
       this.sendRes(res, 200, collection);
     } catch (error) {
@@ -20,7 +21,7 @@ export class ImgController<
   async delete(
     req: Request,
     res: Response,
-    next?: NextFunction,
+    next?: NextFunction
   ): Promise<void> {
     throw new Error("Method not implemented.");
   }
@@ -28,7 +29,7 @@ export class ImgController<
   async update(
     req: Request,
     res: Response,
-    next?: NextFunction,
+    next?: NextFunction
   ): Promise<void> {
     throw new Error("Method not implemented.");
   }
@@ -36,7 +37,7 @@ export class ImgController<
   async create(
     req: Request,
     res: Response,
-    next?: NextFunction,
+    next?: NextFunction
   ): Promise<void> {
     throw new Error("Method not implemented.");
   }

@@ -4,6 +4,7 @@ import cors from "cors";
 import dbMongoConnect from "./db";
 import path = require("path");
 import sliderRouter from "./routes/sliderRouter";
+import popularFoodRouter from "./routes/popularRouter";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ dbMongoConnect();
 app.use("/img", express.static(path.join(__dirname, "img")));
 
 app.use("/apiSlider", sliderRouter);
+app.use("/popular", popularFoodRouter);
 
 app.listen(port, () => {
   console.log(`Сервер на порту ${port} запущен`);
