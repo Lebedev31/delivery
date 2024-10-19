@@ -81,7 +81,7 @@ input::-ms-clear {
 }
 
 button,
-input[type='submit'] {
+input[type="submit"] {
   display: inline-block;
   box-shadow: none;
   background-color: transparent;
@@ -112,11 +112,11 @@ legend {
 $grid-column: 12;
 
 body {
-  background-image: url('../../../public/images/bg\ \(2\).png');
+  background-image: url("../../../public/images/bg\ \(2\).png");
   background-size: cover;
   background-position: center;
   background-color: rgba(9, 35, 78, 0.9);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   overflow-x: hidden;
 }
@@ -139,5 +139,5 @@ body {
   text-align: center;
   grid-template-rows: auto;
   position: relative;
-  margin-top: 82px;
+  // margin-top: 82px;
 }

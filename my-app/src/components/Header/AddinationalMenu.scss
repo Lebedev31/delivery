@@ -1,0 +1,32 @@
+@import "../../styles/variables.scss";
+.addinational {
+  width: 237px;
+  height: 154px;
+  top: 30px;
+  left: -25%;
+  background: rgba(0, 0, 0, 1);
+  position: absolute;
+  padding-left: 20px;
+  padding-top: 21px;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+  li {
+    margin-bottom: 30px;
+    color: $color-text;
+    font-size: 17px;
+    line-height: 20.72px;
+    cursor: pointer;
+  }
+
+  li:hover {
+    color: green !important;
+  }
+}
+
+.addinational__menu-active {
+  opacity: 1;
+  transition: all 0.5s ease;
+  visibility: visible;
+}

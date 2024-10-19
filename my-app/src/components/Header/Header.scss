@@ -1,4 +1,5 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
 
 .header__active {
   background-color: rgb(1, 5, 12) !important;
@@ -7,8 +8,7 @@
 .header {
   position: fixed;
   width: 100%;
-  height: 30px;
-  top: 52px;
+  height: 45px;
   left: 0;
   display: flex;
   justify-content: space-between;
@@ -16,14 +16,14 @@
   padding-left: 25px;
   padding-right: 25px;
   z-index: 1000;
-  background-color: rgb(6, 36, 85);
+  background-color: rgb(9, 44, 100);
 
   .header__search {
     position: absolute;
-    width: 92%;
+    width: 91%;
     left: 50%;
     transform: translateX(-50%);
-    top: 35px;
+    top: 55px;
     visibility: hidden;
     transition: all 0.3s ease;
     opacity: 0;
@@ -90,6 +90,18 @@
       font-weight: 500;
       line-height: 14.63px;
       text-transform: uppercase;
+
+      .header__additional-menu {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        img {
+          width: 9px;
+          height: 5.7px;
+          margin-left: 5px;
+        }
+      }
 
       @media (max-width: 1190px) {
         font-size: 10px;

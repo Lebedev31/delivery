@@ -6,3 +6,7 @@ export interface ISliderCollection {
   weight: string;
   title: string;
 }
+
+export interface IPopularFoods extends ISliderCollection {
+  promotion?: string;
+}
