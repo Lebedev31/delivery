@@ -2,10 +2,9 @@ import BaseController from "./baseController";
 import { Response, Request, NextFunction } from "express";
 import { SliderServices } from "../services/imgServices";
 import SliderShema from "../models/SliderShema";
+import { ISliderCollection } from "../interfase/modelsInterfase";
 
-export class ImgController<
-  ISliderCollection
-> extends BaseController<ISliderCollection> {
+export class ImgController extends BaseController<ISliderCollection> {
   async read(req: Request, res: Response, next?: NextFunction): Promise<void> {
     try {
       const sliderServices = new SliderServices(SliderShema);

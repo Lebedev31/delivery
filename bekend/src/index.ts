@@ -13,9 +13,8 @@ const port = process.env.PORT || 4000;
 app.use(cors());
 dbMongoConnect();
 app.use("/img", express.static(path.join(__dirname, "img")));
-
-app.use("/apiSlider", sliderRouter);
 app.use("/popular", popularFoodRouter);
+app.use("/apiSlider", sliderRouter);
 
 app.listen(port, () => {
   console.log(`Сервер на порту ${port} запущен`);

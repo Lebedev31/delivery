@@ -1,14 +1,16 @@
 import { ImgController } from "./imgController";
 import { Response, Request } from "express";
 import { PopularFoodServices } from "../services/imgServices";
-import PopularFoodsSchema from "../models/SliderShema";
-import { IPopularFoods } from "../interfase/modelsInterfase";
+import PopularFoodsSchema from "../models/PopularFoods";
 
-class PopularFoodController extends ImgController<IPopularFoods> {
+class PopularFoodController extends ImgController {
+  constructor() {
+    super(PopularFoodsSchema);
+  }
   override async read(req: Request, res: Response): Promise<void> {
     try {
-      const sliderServices = new PopularFoodServices(PopularFoodsSchema);
-      const collection = await sliderServices.getAll();
+      const popularServices = new PopularFoodServices(PopularFoodsSchema);
+      const collection = await popularServices.getAll();
       this.sendRes(res, 200, collection);
     } catch (error) {
       if (error instanceof Error) {
@@ -18,6 +20,6 @@ class PopularFoodController extends ImgController<IPopularFoods> {
   }
 }
 
-const popularFoodController = new PopularFoodController(PopularFoodsSchema);
+const popularFoodController = new PopularFoodController();
 
 export default popularFoodController;
