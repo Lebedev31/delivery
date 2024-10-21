@@ -1,13 +1,76 @@
 @import "../../styles/variables.scss";
 .popular {
+  h1 {
+    font-size: 80px;
+    line-height: 90px;
+  }
   margin-top: 250px;
-  font-size: 80px;
-  line-height: 90px;
+
   color: $color-text;
   .popular__block {
     width: 100%;
     min-height: 920px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+
+    .popular__item {
+      margin-top: 37px;
+      width: 233px;
+      height: 447px;
+
+      .popular__img {
+        width: 233px;
+        height: 233px;
+        object-fit: cover;
+      }
+
+      h3 {
+        font-size: 20px;
+        line-height: 24.38px;
+        text-align: left;
+        margin-top: 16px;
+        height: 45px;
+      }
+
+      .popular__weight {
+        margin-top: 10px;
+        width: 47px;
+        height: 20px;
+        border-radius: 3px 0px 0px 0px;
+        font-size: 13px;
+        background-color: rgb(108, 105, 105);
+        text-align: center;
+        padding-top: 2px;
+      }
+
+      .popular__description {
+        margin-top: 9px;
+        width: 233px;
+        height: 58px;
+        font-family: Montserrat;
+        font-size: 13px;
+        line-height: 18px;
+        text-align: left;
+      }
+      .popular__order {
+        height: 42px;
+        margin-top: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .popular__price {
+          text-align: left;
+          .popular__price-item {
+            font-size: 18px;
+          }
+
+          .popular__promotion {
+            font-size: 23px;
+          }
+        }
+      }
+    }
   }
 }
