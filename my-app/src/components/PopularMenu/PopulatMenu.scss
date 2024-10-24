@@ -3,8 +3,24 @@
   h1 {
     font-size: 80px;
     line-height: 90px;
+    @media (max-width: 500px) {
+      font-size: 40px;
+      line-height: 45px;
+    }
   }
   margin-top: 250px;
+
+  @media (max-width: 768px) {
+    margin-top: 340px;
+  }
+
+  @media (max-width: 500px) {
+    margin-top: 250px;
+  }
+
+  @media (max-width: 360px) {
+    margin-top: 66px;
+  }
 
   color: $color-text;
   .popular__block {
@@ -14,15 +30,39 @@
     flex-wrap: wrap;
     justify-content: space-between;
 
+    @media (max-width: 670px) {
+      justify-content: center;
+      gap: 35px;
+    }
+
+    @media (max-width: 500px) {
+      gap: 15px;
+      margin-top: 35px;
+    }
+
     .popular__item {
       margin-top: 37px;
       width: 233px;
       height: 447px;
 
+      @media (max-width: 530px) {
+        width: 190px;
+        margin-top: 0;
+      }
+
+      @media (max-width: 430px) {
+        width: 155px;
+        height: 400px;
+      }
+
       .popular__img {
         width: 233px;
         height: 233px;
         object-fit: cover;
+        @media (max-width: 530px) {
+          width: 100%;
+          height: 190px;
+        }
       }
 
       h3 {
@@ -31,6 +71,9 @@
         text-align: left;
         margin-top: 16px;
         height: 45px;
+        @media (max-width: 530px) {
+          font-size: 14px;
+        }
       }
 
       .popular__weight {
@@ -52,6 +95,10 @@
         font-size: 13px;
         line-height: 18px;
         text-align: left;
+
+        @media (max-width: 530px) {
+          display: none;
+        }
       }
       .popular__order {
         height: 42px;
@@ -59,12 +106,23 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        width: 150px;
+
+        .popular__basket {
+          width: 42px;
+          height: 42px;
+          background-color: rgba(251, 209, 62, 1);
+          padding-top: 7px;
+          cursor: pointer;
+        }
+
+        @media (max-width: 360px) {
+          width: 39px;
+          height: 39px;
+        }
 
         .popular__price {
           text-align: left;
-          .popular__price-item {
-            font-size: 18px;
-          }
 
           .popular__promotion {
             font-size: 23px;

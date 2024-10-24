@@ -1,4 +1,4 @@
-export interface IServices<T = any> {
+export interface IServices<T> {
   create?(body: T): Promise<T | null>;
   getAll?(): Promise<T[]>;
   getId?(id: string): Promise<T>;

@@ -4,9 +4,6 @@ import { PopularFoodServices } from "../services/imgServices";
 import PopularFoodsSchema from "../models/PopularFoods";
 
 class PopularFoodController extends ImgController {
-  constructor() {
-    super(PopularFoodsSchema);
-  }
   override async read(req: Request, res: Response): Promise<void> {
     try {
       const popularServices = new PopularFoodServices(PopularFoodsSchema);
@@ -20,6 +17,6 @@ class PopularFoodController extends ImgController {
   }
 }
 
-const popularFoodController = new PopularFoodController();
+const popularFoodController = new PopularFoodController(PopularFoodsSchema);
 
 export default popularFoodController;
