@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import Main from "../Main/Main";
 import PopularMenu from "../PopularMenu/PopularMenu";
+import Menu from "../Menu/Menu";
 
 function App() {
   const active = useSelector((state: RootState) => state.main.isActive);
@@ -25,6 +26,7 @@ function App() {
       <main style={{ gridColumn: "1/13" }}>
         <Main />
         <PopularMenu />
+        <Menu />
       </main>
     </div>
   );

@@ -1,7 +1,7 @@
 import { IServices } from "../interfase/servicesInterface";
 import { Model } from "mongoose";
 
-export abstract class BaseServices<T> implements IServices {
+export abstract class BaseServices<T> implements IServices<T> {
   private model: Model<T>;
   constructor(model: Model<T>) {
     this.model = model;

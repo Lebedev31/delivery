@@ -2,7 +2,7 @@ import { IController } from "../interfase/controllerInterface";
 import { Request, Response, NextFunction } from "express";
 import { Model } from "mongoose";
 
-abstract class BaseController<T> implements IController<T> {
+abstract class BaseController<T> implements IController {
   private model: Model<T>;
 
   constructor(model: Model<T>) {
