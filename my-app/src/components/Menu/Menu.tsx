@@ -23,15 +23,29 @@ const settings = {
   prevArrow: <LeftArrow />,
   responsive: [
     {
-      breakpoint: 1480, // Для экранов меньше 1024px
+      breakpoint: 1480,
       settings: {
         slidesToShow: 5,
       },
     },
     {
-      breakpoint: 768, // Для экранов меньше 768px
+      breakpoint: 1220,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 4,
+      },
+    },
+
+    {
+      breakpoint: 960,
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+
+    {
+      breakpoint: 420,
+      settings: {
+        slidesToShow: 2,
       },
     },
   ],

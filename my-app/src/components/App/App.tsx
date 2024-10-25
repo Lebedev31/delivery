@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import Main from "../Main/Main";
 import PopularMenu from "../PopularMenu/PopularMenu";
 import Menu from "../Menu/Menu";
+import Footer from "../Footer/Footer";
 
 function App() {
   const active = useSelector((state: RootState) => state.main.isActive);
@@ -28,6 +29,7 @@ function App() {
         <PopularMenu />
         <Menu />
       </main>
+      <Footer />
     </div>
   );
 }

@@ -6,10 +6,26 @@
   height: 468px;
   width: 100%;
   position: relative;
+
+  @media (max-width: 600px) {
+    margin-top: 100px;
+  }
+
+  @media (max-width: 500px) {
+    margin-top: 20px;
+  }
   h2 {
     font-size: 80px;
     line-height: 90px;
     color: $color-text;
+    @media (max-width: 768px) {
+      text-align: left;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 40px;
+      line-height: 45px;
+    }
   }
 
   .slider-container {
@@ -26,6 +42,23 @@
       top: -41%;
       left: 88%;
       cursor: pointer;
+      @media (max-width: 1024px) {
+        left: 83%;
+      }
+
+      @media (max-width: 800px) {
+        left: 77%;
+      }
+
+      @media (max-width: 600px) {
+        width: 39px;
+        height: 39px;
+        top: -53%;
+      }
+
+      @media (max-width: 360px) {
+        left: 73%;
+      }
       img {
         width: 100%;
         height: auto;
@@ -41,6 +74,21 @@
       width: 56px;
       height: 56px;
       cursor: pointer;
+
+      @media (max-width: 1024px) {
+        left: 93%;
+      }
+
+      @media (max-width: 800px) {
+        left: 90%;
+      }
+
+      @media (max-width: 600px) {
+        width: 39px;
+        height: 39px;
+        top: -43%;
+      }
+
       img {
         width: 100%;
         height: auto;
@@ -61,6 +109,11 @@
       background-color: black;
       cursor: pointer;
 
+      @media (max-width: 600px) {
+        width: 130px !important;
+        height: 180px !important;
+      }
+
       .menu-slider-img {
         display: flex;
         justify-content: center;
@@ -68,6 +121,10 @@
         img {
           width: 162px;
           height: 100px;
+          @media (max-width: 600px) {
+            width: 92px;
+            height: 50px;
+          }
         }
       }
 
@@ -77,7 +134,18 @@
         line-height: 24.38px;
         margin-top: 45px;
         margin-bottom: 45px;
+
+        @media (max-width: 600px) {
+          margin-top: 30px;
+          margin-bottom: 30px;
+          font-size: 16px;
+          line-height: 19px;
+        }
       }
+    }
+
+    .menu-slider-item:hover {
+      background-color: rgb(9, 44, 100);
     }
 
     .menu-slider__promotion {
@@ -85,10 +153,19 @@
       height: 314px !important;
       background: rgba(183, 0, 0, 1);
       text-align: center;
+      cursor: pointer;
+      @media (max-width: 600px) {
+        width: 130px !important;
+        height: 180px !important;
+      }
 
       p {
         color: rgb(15, 15, 17);
         font-size: 60px;
+
+        @media (max-width: 600px) {
+          font-size: 40px;
+        }
       }
 
       .menu-slider__img {
@@ -101,6 +178,11 @@
         margin-top: 56px;
         margin-bottom: 54px;
         text-transform: uppercase;
+        @media (max-width: 600px) {
+          font-size: 17px;
+          margin-top: 30px;
+          margin-bottom: 30px;
+        }
         .menu-slider__fire {
           width: 18px;
           height: 18px;
