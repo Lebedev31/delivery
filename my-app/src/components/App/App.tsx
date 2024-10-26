@@ -7,6 +7,7 @@ import Main from "../Main/Main";
 import PopularMenu from "../PopularMenu/PopularMenu";
 import Menu from "../Menu/Menu";
 import Footer from "../Footer/Footer";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 function App() {
   const active = useSelector((state: RootState) => state.main.isActive);
@@ -25,8 +26,12 @@ function App() {
     <div className="container">
       <Header />
       <main style={{ gridColumn: "1/13" }}>
-        <Main />
-        <PopularMenu />
+        <ErrorBoundary>
+          <Main />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <PopularMenu />
+        </ErrorBoundary>
         <Menu />
       </main>
       <Footer />

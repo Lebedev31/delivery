@@ -4,13 +4,16 @@ import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useGetAllQuery } from "../../redux/apiSliderSlice";
 import { Slider } from "../../redux/types";
+import CircularProgress from '@mui/material/CircularProgress';
+import ErrorContainer from "../ErrorBoundary/ErrorContainer";
 
 function Main() {
-  const { data, isLoading } = useGetAllQuery();
+  const { data, isLoading, error } = useGetAllQuery();
   const [show, setShow] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dataArray, setDataArray] = useState<Slider[]>([]);
   const baseUrl = "http://localhost:8080/";
+
 
 
   useEffect(() => {
@@ -40,7 +43,16 @@ function Main() {
     }
   }, [dataArray]);
 
+  if(isLoading){
+   return <CircularProgress size={60} color="secondary" />
+  }
+
+  if(error){
+      return <ErrorContainer/>
+  }
+
   return (
+
     <section className="main">
       <aside className="main__contact">
         <h2>Доставка готовой еды из фермерских продуктов!</h2>

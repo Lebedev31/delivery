@@ -52,7 +52,8 @@
 
       @media (max-width: 430px) {
         width: 155px;
-        height: 400px;
+        height: 350px;
+        cursor: pointer;
       }
 
       .popular__img {
@@ -62,6 +63,10 @@
         @media (max-width: 530px) {
           width: 100%;
           height: 190px;
+        }
+
+        @media (max-width: 450px) {
+          height: 150px;
         }
       }
 
@@ -114,11 +119,11 @@
           background-color: rgba(251, 209, 62, 1);
           padding-top: 7px;
           cursor: pointer;
-        }
 
-        @media (max-width: 360px) {
-          width: 39px;
-          height: 39px;
+          @media (max-width: 360px) {
+            width: 39px;
+            height: 39px;
+          }
         }
 
         .popular__price {

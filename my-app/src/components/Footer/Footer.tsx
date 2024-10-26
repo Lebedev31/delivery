@@ -26,7 +26,7 @@ function Footer() {
         </div>
       </div>
 
-      <hr />
+      <hr className="footer__line" />
       <div className="footer__confidential">
         <div className="footer__info">
           © 2009–2019, ООО «MIDAS», официальный сайт

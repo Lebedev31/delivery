@@ -11,7 +11,7 @@ class PopularFoodController extends ImgController {
       this.sendRes(res, 200, collection);
     } catch (error) {
       if (error instanceof Error) {
-        this.handleError(401, error, res);
+        this.handleError(error, res);
       }
     }
   }

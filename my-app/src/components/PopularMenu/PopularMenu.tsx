@@ -73,7 +73,7 @@ function PopularMenu() {
                   </p>
                   {item.promotion ? (
                     <p className="popular__promotion">
-                      {getPromotionPrice(item.price, item.promotion) + " р"}
+                      {getPromotionPrice(item.price, item.promotion) + "р"}
                     </p>
                   ) : null}
                 </div>
