@@ -17,6 +17,6 @@ class PopularFoodController extends ImgController {
   }
 }
 
-const popularFoodController = new PopularFoodController(PopularFoodsSchema);
+const popularFoodController = new PopularFoodController();
 
 export default popularFoodController;

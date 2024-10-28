@@ -10,3 +10,7 @@ export interface ISliderCollection {
 export interface IPopularFoods extends ISliderCollection {
   promotion?: string;
 }
+
+export interface ICategoryFood extends IPopularFoods {
+  category: string;
+}

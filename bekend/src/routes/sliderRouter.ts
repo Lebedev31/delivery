@@ -1,8 +1,7 @@
 import { Router } from "express";
 import { ImgController } from "../controllers/imgController";
-import SliderShema from "../models/SliderShema";
 
-const imgController = new ImgController(SliderShema);
+const imgController = new ImgController();
 
 const sliderRouter = Router();
 

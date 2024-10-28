@@ -6,6 +6,7 @@ import { useGetAllQuery } from "../../redux/apiSliderSlice";
 import { Slider } from "../../redux/types";
 import CircularProgress from '@mui/material/CircularProgress';
 import ErrorContainer from "../ErrorBoundary/ErrorContainer";
+import { useMediaQuery } from "@mui/material";
 
 function Main() {
   const { data, isLoading, error } = useGetAllQuery();
@@ -13,6 +14,7 @@ function Main() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dataArray, setDataArray] = useState<Slider[]>([]);
   const baseUrl = "http://localhost:8080/";
+  const media = useMediaQuery('(max-width: 360px)');
 
 
 
@@ -23,7 +25,7 @@ function Main() {
   }, [data]);
 
   useEffect(() => {
-    if (dataArray.length !== 0) {
+    if (dataArray.length !== 0 && !media) {
       const interval = setInterval(() => {
         setCurrentSlide((prevSlide) => {
           setShow(false);

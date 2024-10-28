@@ -6,11 +6,11 @@ import { BaseCustomError } from "../error/errorBase";
 import { examinationCustomError } from "../error/errorBase";
 
 abstract class BaseController<T> implements IController {
-  private model: Model<T>;
+  // private model: Model<T>;
 
-  constructor(model: Model<T>) {
-    this.model = model;
-  }
+  //constructor(model: Model<T>) {
+  //  this.model = model;
+  // }
 
   abstract create?(
     req: Request,

@@ -1,0 +1,22 @@
+@import "../../styles/variables.scss";
+.category {
+  margin-top: 97px;
+  .category__title {
+    text-align: left;
+  }
+
+  .category__home {
+    font-size: 13px;
+    line-height: 15.85px;
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    a {
+      color: $color-text;
+    }
+
+    span {
+      color: #d0c6c6;
+    }
+  }
+}

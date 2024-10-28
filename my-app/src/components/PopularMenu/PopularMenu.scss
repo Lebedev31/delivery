@@ -25,7 +25,7 @@
   color: $color-text;
   .popular__block {
     width: 100%;
-    min-height: 920px;
+    min-height: 450px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -95,8 +95,7 @@
       .popular__description {
         margin-top: 9px;
         width: 233px;
-        height: 58px;
-        font-family: Montserrat;
+        height: 70px;
         font-size: 13px;
         line-height: 18px;
         text-align: left;

@@ -8,6 +8,9 @@ import PopularMenu from "../PopularMenu/PopularMenu";
 import Menu from "../Menu/Menu";
 import Footer from "../Footer/Footer";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Fragment } from "react";
+import CategoryMenu from "../CategoryMenu/CategoryMenu";
 
 function App() {
   const active = useSelector((state: RootState) => state.main.isActive);
@@ -24,17 +27,30 @@ function App() {
 
   return (
     <div className="container">
-      <Header />
-      <main style={{ gridColumn: "1/13" }}>
-        <ErrorBoundary>
-          <Main />
-        </ErrorBoundary>
-        <ErrorBoundary>
-          <PopularMenu />
-        </ErrorBoundary>
-        <Menu />
-      </main>
-      <Footer />
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Fragment>
+                <Header />
+                <main style={{ gridColumn: "1/13" }}>
+                  <ErrorBoundary>
+                    <Main />
+                  </ErrorBoundary>
+                  <ErrorBoundary>
+                    <PopularMenu />
+                  </ErrorBoundary>
+                  <Menu />
+                </main>
+                <Footer />
+              </Fragment>
+            }
+          />
+
+          <Route path="/category/:id" element={<CategoryMenu />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

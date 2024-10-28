@@ -29,3 +29,12 @@ export type PopularFoodResponseData = {
   status: number;
   data: PopularFood[];
 };
+
+export interface ICategoryMenu extends PopularFood {
+  category: string;
+}
+
+export type CategoryMenuResponseData = {
+  status: number;
+  data: ICategoryMenu[];
+};

@@ -9,6 +9,7 @@ import { RootState } from '../../redux/store';
 import img1 from '../../img/галочка.png';
 import AddinationalMenu from './AddinationalMenu';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const active = useSelector((state: RootState) => state.main.isActive);
@@ -46,7 +47,7 @@ function Header() {
             <AddinationalMenu categoryArray={categoryArray2} activeMenu={activeMenuCold}/>
           </li>
           <li>Свежая выпечка</li>
-          <li>Десерты</li>
+          <li><Link to={`/category/Десерты`}>Десерты</Link></li>
           <li>Напитки</li>
         </ul>
       </nav>

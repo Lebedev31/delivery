@@ -1,4 +1,5 @@
 import "./AddinationalMenu.scss";
+import { Link } from "react-router-dom";
 
 type Props = {
   activeMenu: boolean;
@@ -14,7 +15,11 @@ function AddinationalMenu({ activeMenu, categoryArray }: Props) {
     >
       <ul>
         {categoryArray.map((item, index) => {
-          return <li key={index}>{item}</li>;
+          return (
+            <Link to={`/category/${item}`} key={index}>
+              <li>{item}</li>
+            </Link>
+          );
         })}
       </ul>
     </div>
