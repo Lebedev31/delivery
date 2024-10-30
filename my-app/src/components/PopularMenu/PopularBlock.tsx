@@ -1,11 +1,19 @@
 import "./PopularMenu.scss";
 import { Basket } from "../Main/Svg";
 import { PopularFood, ICategoryMenu } from "../../redux/types";
+import { Link } from "react-router-dom";
 
 type UnionDataArray = PopularFood | ICategoryMenu;
 
 interface ListProps<T extends UnionDataArray> {
   dataArray: T[];
+}
+
+function getCategory(item: UnionDataArray): string | undefined {
+  if ("category" in item) {
+    return item.category;
+  }
+  return undefined; // Или обработать отсутствие свойства
 }
 
 function PopularBlock<T extends UnionDataArray>({ dataArray }: ListProps<T>) {
@@ -54,7 +62,20 @@ function PopularBlock<T extends UnionDataArray>({ dataArray }: ListProps<T>) {
                 </div>
 
                 <div className="popular__basket">
-                  <Basket />
+                  <Link
+                    to={`/individual-food/${item.title}`}
+                    state={{
+                      imgPath: `${baseUrl + item.imgPath}`,
+                      price: item.price,
+                      title: item.title,
+                      description: item.description,
+                      category: getCategory(item)
+                        ? getCategory(item)
+                        : "Популярные блюда",
+                    }}
+                  >
+                    <Basket />
+                  </Link>
                 </div>
               </div>
             </div>

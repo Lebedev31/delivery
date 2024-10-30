@@ -46,9 +46,9 @@ function Header() {
             <img src={img1} alt="галочка" />
             <AddinationalMenu categoryArray={categoryArray2} activeMenu={activeMenuCold}/>
           </li>
-          <li>Свежая выпечка</li>
+          <li><Link to={`/category/Свежая выпечка`}>Свежая выпечка</Link></li>
           <li><Link to={`/category/Десерты`}>Десерты</Link></li>
-          <li>Напитки</li>
+          <li><Link to={`/category/Напитки`}>Напитки</Link></li>
         </ul>
       </nav>
 

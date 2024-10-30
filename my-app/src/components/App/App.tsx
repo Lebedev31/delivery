@@ -11,6 +11,7 @@ import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Fragment } from "react";
 import CategoryMenu from "../CategoryMenu/CategoryMenu";
+import IndividualFood from "../IndifidualFood/IndividualFood";
 
 function App() {
   const active = useSelector((state: RootState) => state.main.isActive);
@@ -47,7 +48,7 @@ function App() {
               </Fragment>
             }
           />
-
+          <Route path="/individual-food/:id" element={<IndividualFood />} />
           <Route path="/category/:id" element={<CategoryMenu />} />
         </Routes>
       </Router>

@@ -91,6 +91,15 @@
       line-height: 14.63px;
       text-transform: uppercase;
 
+      a {
+        color: $color-text;
+      }
+
+      a:hover {
+        color: $color-hover;
+        transition: color 0.3s ease;
+      }
+
       .header__additional-menu {
         display: flex;
         align-items: center;

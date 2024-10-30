@@ -21,7 +21,12 @@ function CategoryMenu() {
 
   useEffect(() => {
     if (data && !isLoading) {
-      setDataArray(data.data);
+      setDataArray(() => {
+        const newArray = [...data.data].sort(
+          (a, b) => parseInt(a.price) - parseInt(b.price)
+        );
+        return newArray;
+      });
     }
   }, [data]);
 
@@ -33,6 +38,44 @@ function CategoryMenu() {
     return <ErrorContainer />;
   }
 
+  function hadleSelectSort(e: React.ChangeEvent<HTMLSelectElement>) {
+    const target = e.target.value;
+
+    switch (target) {
+      case "По цене":
+        setDataArray((prev) => {
+          const newArray = [...prev].sort(
+            (a, b) => parseInt(a.price) - parseInt(b.price)
+          );
+          return newArray;
+        });
+        break;
+
+      case "По акциям":
+        setDataArray((prev) => {
+          const newArray = [...prev].sort((a, b) => {
+            const promotionA = a.promotion === "" ? 0 : parseInt(a.promotion);
+            const promotionB = b.promotion === "" ? 0 : parseInt(b.promotion);
+            return promotionB - promotionA;
+          });
+          return newArray;
+        });
+        break;
+
+      case "По весу":
+        setDataArray((prev) => {
+          const newArray = [...prev].sort(
+            (a, b) => parseInt(a.weight) - parseInt(b.weight)
+          );
+          return newArray;
+        });
+        break;
+
+      default:
+        return;
+    }
+  }
+
   return (
     <section style={{ gridColumn: "1/13" }}>
       <Header />
@@ -42,6 +85,14 @@ function CategoryMenu() {
           <Link to="/">Главная / </Link>
           <span> {`${"  "}${categoryName}`}</span>
         </p>
+        <div className="category__sort">
+          <p>Cортировать:</p>
+          <select onChange={hadleSelectSort}>
+            <option value="По цене">По цене</option>
+            <option value="По акциям">По акциям</option>
+            <option value="По весу">По весу</option>
+          </select>
+        </div>
         <PopularBlock dataArray={dataArray} />
       </div>
       <Footer />

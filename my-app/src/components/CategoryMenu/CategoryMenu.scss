@@ -3,6 +3,10 @@
   margin-top: 97px;
   .category__title {
     text-align: left;
+    @media (max-width: 700px) {
+      font-size: 40px;
+      text-align: center;
+    }
   }
 
   .category__home {
@@ -17,6 +21,31 @@
 
     span {
       color: #d0c6c6;
+    }
+  }
+
+  .category__sort {
+    display: flex;
+    align-items: center;
+    margin-top: 13px;
+    justify-content: flex-end;
+
+    @media (max-width: 700px) {
+      justify-content: flex-start;
+    }
+    p {
+      color: #d0c6c6;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+    }
+    select {
+      outline: none;
+      background-color: none;
+      cursor: pointer;
+      option {
+        background-color: $color-hover;
+        cursor: pointer;
+      }
     }
   }
 }

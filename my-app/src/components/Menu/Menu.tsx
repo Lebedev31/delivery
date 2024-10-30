@@ -12,6 +12,7 @@ import img8 from "../../img/холодные2.png";
 import img9 from "../../img/супы1.png";
 import img10 from "../../img/супы2.png";
 import fire from "../../img/image 9.png";
+import { Link } from "react-router-dom";
 
 const settings = {
   dots: false, // Показать индикаторы
@@ -82,7 +83,9 @@ function Menu() {
                 <div className="menu-slider-img">
                   <img src={item[0]} alt="" />
                 </div>
-                <h3>{item[2]}</h3>
+                <h3>
+                  <Link to={`/category/${item[2]}`}>{item[2]}</Link>
+                </h3>
                 <div className="menu-slider-img">
                   <img src={item[1]} alt="" />
                 </div>
