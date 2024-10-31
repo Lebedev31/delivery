@@ -1,12 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { Active } from './types';
+import { createSlice } from "@reduxjs/toolkit";
+import { Active } from "./types";
 
 const initialState: Active = {
   isActive: false,
 };
 
 const mainSlice = createSlice({
-  name: 'main',
+  name: "main",
   initialState,
   reducers: {
     setActive: (state) => {

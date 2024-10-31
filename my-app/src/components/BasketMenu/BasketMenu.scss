@@ -1,0 +1,58 @@
+@import "../../styles//variables.scss";
+
+.basket {
+  margin-top: 85px;
+  .basket__title {
+    text-align: left;
+    line-height: 90px;
+    font-size: 80px;
+    color: $color-text;
+    display: flex;
+    width: 100%;
+    gap: 15px;
+
+    p {
+      color: rgba(251, 209, 62, 1);
+      font-size: 50px;
+      line-height: 55px;
+    }
+  }
+
+  .basket__home {
+    font-size: 13px;
+    line-height: 15.85px;
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    color: $color-text;
+    span {
+      opacity: 80%;
+    }
+    a {
+      color: $color-text;
+    }
+
+    span {
+      color: #d0c6c6;
+    }
+  }
+
+  .basket__content {
+    margin-top: 38px;
+    min-height: 216px;
+    .basket__info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-left: 180px;
+      li {
+        font-size: 13px;
+        line-height: 15.85px;
+        letter-spacing: 0.05em;
+        text-align: left;
+        color: rgba(158, 162, 170, 1);
+        text-transform: uppercase;
+      }
+    }
+  }
+}

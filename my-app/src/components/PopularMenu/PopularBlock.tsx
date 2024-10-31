@@ -30,7 +30,7 @@ function PopularBlock<T extends UnionDataArray>({ dataArray }: ListProps<T>) {
   }
 
   return (
-    <section>
+    <div>
       <div className="popular__block">
         {dataArray.map((item, index) => {
           return (
@@ -66,6 +66,7 @@ function PopularBlock<T extends UnionDataArray>({ dataArray }: ListProps<T>) {
                     to={`/individual-food/${item.title}`}
                     state={{
                       imgPath: `${baseUrl + item.imgPath}`,
+                      weight: item.weight,
                       price: item.price,
                       title: item.title,
                       description: item.description,
@@ -82,7 +83,7 @@ function PopularBlock<T extends UnionDataArray>({ dataArray }: ListProps<T>) {
           );
         })}
       </div>
-    </section>
+    </div>
   );
 }
 

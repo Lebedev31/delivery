@@ -38,3 +38,11 @@ export type CategoryMenuResponseData = {
   status: number;
   data: ICategoryMenu[];
 };
+
+export type BasketState = {
+  imgPath: string;
+  title: string;
+  sum: number;
+  quantity: number;
+  weight: number;
+};
