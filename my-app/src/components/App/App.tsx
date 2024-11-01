@@ -13,6 +13,7 @@ import { Fragment } from "react";
 import CategoryMenu from "../CategoryMenu/CategoryMenu";
 import IndividualFood from "../IndifidualFood/IndividualFood";
 import BasketMenu from "../BasketMenu/BasketMenu";
+import FormRegister from "../FormRegister/FormRegiter";
 
 function App() {
   const active = useSelector((state: RootState) => state.main.isActive);
@@ -52,6 +53,7 @@ function App() {
           <Route path="/individual-food/:id" element={<IndividualFood />} />
           <Route path="/category/:id" element={<CategoryMenu />} />
           <Route path="/basket" element={<BasketMenu />} />
+          <Route path="/register" element={<FormRegister />} />
         </Routes>
       </Router>
     </div>

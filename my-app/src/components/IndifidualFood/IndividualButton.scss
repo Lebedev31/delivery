@@ -1,0 +1,78 @@
+.individual__button {
+  width: 81px;
+  height: 42px;
+  border-bottom: 1px solid rgba(158, 162, 170, 1);
+  border-top: 1px solid rgba(158, 162, 170, 1);
+  position: relative;
+
+  .border__right::before,
+  .border__right::after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    background-color: rgba(158, 162, 170, 1);
+    right: 0;
+  }
+
+  .border__right::before {
+    top: 0;
+    height: calc(50% - 9px);
+  }
+
+  .border__right::after {
+    bottom: 0;
+    height: calc(50% - 9px);
+  }
+
+  .border__left::before,
+  .border__left::after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    background-color: rgba(158, 162, 170, 1);
+    left: 0;
+  }
+
+  .border__left::before {
+    top: 0;
+    height: calc(50% - 9px);
+  }
+
+  .border__left::after {
+    bottom: 0;
+    height: calc(50% - 9px);
+  }
+  .individual__center {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    color: rgba(158, 162, 170, 1);
+
+    p:nth-child(1) {
+      cursor: pointer;
+      width: 11px;
+      height: 11px;
+      transform: translateX(-4px) translateY(-3px);
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    p:nth-child(2) {
+      font-size: 13px;
+    }
+
+    p:nth-child(3) {
+      cursor: pointer;
+      width: 11px;
+      height: 11px;
+      transform: translateX(4px) translateY(-3px);
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

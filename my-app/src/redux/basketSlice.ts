@@ -66,10 +66,21 @@ const basketSlice = createSlice({
         };
       }
     },
+
+    deletePosition: (state, action: PayloadAction<number>) => {
+      const deleteIndex = state.dataArray.filter(
+        (item, index, arr) => arr[index] !== arr[action.payload]
+      );
+      state.dataArray = deleteIndex;
+    },
   },
 });
 
-export const { pushBasketState, setCounterPlus, setCounterMinus } =
-  basketSlice.actions;
+export const {
+  pushBasketState,
+  setCounterPlus,
+  setCounterMinus,
+  deletePosition,
+} = basketSlice.actions;
 
 export default basketSlice.reducer;

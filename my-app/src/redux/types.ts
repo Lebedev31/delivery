@@ -45,4 +45,5 @@ export type BasketState = {
   sum: number;
   quantity: number;
   weight: number;
+  price: number;
 };

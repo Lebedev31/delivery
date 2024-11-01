@@ -23,7 +23,10 @@ function TabletMenu() {
       <div className="menu__main">
         <div className="menu__promotion">
           <p>30%</p>
-          <div className="menu__img">
+          <div
+            className="menu__img"
+            style={{ display: `${active ? "flex" : "none"}` }}
+          >
             <span>Акции</span>
             <div className="menu__fire">
               <img src={fire} alt="огонь" />
