@@ -47,3 +47,10 @@ export type BasketState = {
   weight: number;
   price: number;
 };
+
+export type DataSubmit = {
+  name: string;
+  email: string;
+  dateOfBirth: string;
+  password: string;
+};

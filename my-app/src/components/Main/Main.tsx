@@ -1,10 +1,10 @@
 import "./Main.scss";
-import {Abstraction, Abstraction2, Basket} from "./Svg";
+import { Abstraction, Abstraction2, Basket } from "./Svg";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useGetAllQuery } from "../../redux/apiSliderSlice";
 import { Slider } from "../../redux/types";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 import ErrorContainer from "../ErrorBoundary/ErrorContainer";
 import { useMediaQuery } from "@mui/material";
 
@@ -14,9 +14,7 @@ function Main() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dataArray, setDataArray] = useState<Slider[]>([]);
   const baseUrl = "http://localhost:8080/";
-  const media = useMediaQuery('(max-width: 360px)');
-
-
+  const media = useMediaQuery("(max-width: 360px)");
 
   useEffect(() => {
     if (data && !isLoading) {
@@ -45,16 +43,26 @@ function Main() {
     }
   }, [dataArray]);
 
-  if(isLoading){
-   return <CircularProgress size={60} color="secondary" />
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress size={150} color="secondary" />
+      </div>
+    );
   }
 
-  if(error){
-      return <ErrorContainer/>
+  if (error) {
+    return <ErrorContainer />;
   }
 
   return (
-
     <section className="main">
       <aside className="main__contact">
         <h2>Доставка готовой еды из фермерских продуктов!</h2>
@@ -75,31 +83,38 @@ function Main() {
           return (
             <div
               key={index}
-              className={`main__slider-box ${show && index === currentSlide ? "active-slider" : ""}`}
+              className={`main__slider-box ${
+                show && index === currentSlide ? "active-slider" : ""
+              }`}
             >
               <Box
                 className="main__slider-item"
                 sx={{ background: `url(${baseUrl + item.imgPath})` }}
-              >
-              </Box>
+              ></Box>
             </div>
           );
         })}
       </Box>
       <div className="main__red-box">
-          <h3>{dataArray.length > 0 ? dataArray[currentSlide].title: ''}</h3>
-          <p className="main__weight">{dataArray.length > 0 ? dataArray[currentSlide].weight: '' }г</p>
-          <p className="main__description">{dataArray.length > 0 ? dataArray[currentSlide].description : ''}</p>
-          <div className="main__price">
-            <h3>{dataArray.length > 0 ? dataArray[currentSlide].price + ' ₽': ''}</h3>
-            <div className="main__basket">
-                <Basket/>
-            </div>
+        <h3>{dataArray.length > 0 ? dataArray[currentSlide].title : ""}</h3>
+        <p className="main__weight">
+          {dataArray.length > 0 ? dataArray[currentSlide].weight : ""}г
+        </p>
+        <p className="main__description">
+          {dataArray.length > 0 ? dataArray[currentSlide].description : ""}
+        </p>
+        <div className="main__price">
+          <h3>
+            {dataArray.length > 0 ? dataArray[currentSlide].price + " ₽" : ""}
+          </h3>
+          <div className="main__basket">
+            <Basket />
           </div>
+        </div>
       </div>
 
       <div className="main__abstraction2">
-        <Abstraction2/>
+        <Abstraction2 />
       </div>
     </section>
   );
