@@ -1,7 +1,6 @@
 import { IServices } from "../interfase/servicesInterface";
 import { Model } from "mongoose";
 import { examinationMongoError } from "../error/errorMongo";
-import { MongoError } from "mongodb";
 export abstract class BaseServices<T> implements IServices<T> {
   private model: Model<T>;
   constructor(model: Model<T>) {

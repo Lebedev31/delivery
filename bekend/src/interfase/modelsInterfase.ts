@@ -14,3 +14,10 @@ export interface IPopularFoods extends ISliderCollection {
 export interface ICategoryFood extends IPopularFoods {
   category: string;
 }
+
+export interface INewUser {
+  name: string;
+  email: string;
+  password: string;
+  dateOfBirth: string;
+}

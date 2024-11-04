@@ -53,4 +53,5 @@ export type DataSubmit = {
   email: string;
   dateOfBirth: string;
   password: string;
+  confirmPassword?: string;
 };

@@ -2,8 +2,7 @@ import "./FormRegister.scss";
 import { TextField } from "@mui/material";
 import { LocalizationProvider, DesktopDatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs, { Dayjs } from "dayjs";
-import { useState } from "react";
+import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -17,8 +16,11 @@ import {
   validationEmail,
   validationPassword,
 } from "./validationForm";
+import { useCreateNewUserMutation } from "../../redux/apiFormSlice";
 
 function FormRegister() {
+  const [createNewUser, { isLoading, isError, isSuccess }] =
+    useCreateNewUserMutation();
   const {
     register,
     handleSubmit,
@@ -29,9 +31,21 @@ function FormRegister() {
   } = useForm<DataSubmit>();
 
   function onSubmit(data: DataSubmit) {
-    console.log(data.dateOfBirth);
-    console.log(7);
+    const user: DataSubmit = {
+      name: data.name,
+      email: data.email,
+      dateOfBirth: data.dateOfBirth,
+      password: data.password,
+    };
+    try {
+      createNewUser(user).unwrap();
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  const password = watch("password");
 
   return (
     <section style={{ gridColumn: "1/13" }}>
@@ -131,15 +145,34 @@ function FormRegister() {
             variant="filled"
             className="formregister__input"
             color="secondary"
+            {...register("confirmPassword", {
+              required: "Подтвердите пароль",
+              validate: (value) => value === password || "Пароли не совпадают",
+            })}
           />
 
           <div className="formregister__error-message">
-            {errors.password && <span>{errors.password.message}</span>}
+            {errors.confirmPassword && (
+              <span>{errors.confirmPassword.message}</span>
+            )}
           </div>
 
           <Button sx={{ width: "320px" }} variant="contained" type="submit">
             Завершить регистрацию
           </Button>
+
+          <div className="formregister__status">
+            <p style={{ color: "#932ab4" }}>
+              {isLoading ? "...Регистрация пользователя" : null}
+            </p>
+            <p style={{ color: "red" }}>
+              {isError ? "Произошла ошибка" : null}
+            </p>
+
+            <p style={{ color: "green" }}>
+              {isSuccess ? "Регистрация завершена" : null}
+            </p>
+          </div>
         </form>
       </div>
       <Footer />
