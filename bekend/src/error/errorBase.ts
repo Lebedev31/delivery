@@ -26,7 +26,7 @@ export class UnauthorizedError extends BaseCustomError {
 
 export class ForbiddenError extends BaseCustomError {
   constructor() {
-    super("Доступ запрщен", ErrorCodeEnum.FORBIDDEN, "FORBIDDEN");
+    super("Доступ запрещен", ErrorCodeEnum.FORBIDDEN, "FORBIDDEN");
   }
 }
 

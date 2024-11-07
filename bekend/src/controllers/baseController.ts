@@ -4,29 +4,8 @@ import { MongoDbError } from "../error/errorMongo";
 import { BaseCustomError } from "../error/errorBase";
 import { examinationCustomError } from "../error/errorBase";
 
-abstract class BaseController<T> implements IController {
-  abstract create?(
-    req: Request,
-    res: Response,
-    next?: NextFunction
-  ): Promise<void>;
-  abstract read?(
-    req: Request,
-    res: Response,
-    next?: NextFunction
-  ): Promise<void>;
-  abstract delete?(
-    req: Request,
-    res: Response,
-    next?: NextFunction
-  ): Promise<void>;
-  abstract update?(
-    req: Request,
-    res: Response,
-    next?: NextFunction
-  ): Promise<void>;
-
-  protected sendRes<T>(res: Response, status: number, data: T) {
+abstract class BaseController<T> {
+  protected sendRes<T>(res: Response, status: number, data: T | string) {
     res.status(status).json({ status, data });
   }
 

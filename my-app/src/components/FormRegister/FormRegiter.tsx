@@ -1,10 +1,11 @@
 import "./FormRegister.scss";
 import { TextField } from "@mui/material";
-import { LocalizationProvider, DesktopDatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import Header from "../Header/Header";
+import { useRef, useEffect } from "react";
 import Footer from "../Footer/Footer";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
@@ -21,6 +22,9 @@ import { useCreateNewUserMutation } from "../../redux/apiFormSlice";
 function FormRegister() {
   const [createNewUser, { isLoading, isError, isSuccess }] =
     useCreateNewUserMutation();
+
+  const inputRef = useRef<HTMLInputElement | null>(null); // Реф для TextField
+
   const {
     register,
     handleSubmit,
@@ -40,12 +44,20 @@ function FormRegister() {
     try {
       createNewUser(user).unwrap();
       reset();
+      const element = document.querySelector("#id") as HTMLInputElement;
+      console.log(element);
     } catch (error) {
       console.log(error);
     }
   }
 
   const password = watch("password");
+
+  useEffect(() => {
+    if (isSuccess || isError) {
+      inputRef.current.value = "";
+    }
+  }, [isSuccess, isError]);
 
   return (
     <section style={{ gridColumn: "1/13" }}>
@@ -77,11 +89,10 @@ function FormRegister() {
                 dateAdapter={AdapterDayjs}
                 adapterLocale="ru"
               >
-                <DesktopDatePicker
+                <DatePicker
                   label="Дата рождения"
                   onChange={(newDate) => {
-                    const formatDate = newDate?.format("DD-MM-YYYY");
-                    onChange(formatDate);
+                    onChange(newDate?.format("DD-MM-YYYY"));
                   }}
                   disableFuture
                   openTo="year"
@@ -91,6 +102,8 @@ function FormRegister() {
                       variant: "filled",
                       color: "secondary",
                       className: "formregister__input",
+                      id: "id",
+                      inputRef: inputRef,
                     },
                     popper: {
                       placement: "bottom-start",

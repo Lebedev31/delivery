@@ -1,14 +1,12 @@
 import { IServices } from "../interfase/servicesInterface";
 import { Model } from "mongoose";
 import { examinationMongoError } from "../error/errorMongo";
-export abstract class BaseServices<T> implements IServices<T> {
+
+export class BaseServices<T> implements IServices<T> {
   private model: Model<T>;
   constructor(model: Model<T>) {
     this.model = model;
   }
-  // abstract create?(body: T): Promise<T>;
-  // abstract update?(id: string): Promise<T>;
-
   async getAll(): Promise<T[] | []> {
     try {
       const findCollection = (await this.model.find().lean()) as T[];
@@ -21,10 +19,10 @@ export abstract class BaseServices<T> implements IServices<T> {
       throw error;
     }
   }
-  async getId(id: string): Promise<T[] | []> {
+  async getId(id: string, property: string): Promise<T[] | []> {
     try {
       const findCollection = (await this.model
-        .find({ category: id })
+        .find({ property: id })
         .lean()) as T[];
       return findCollection.length ? findCollection : [];
     } catch (error) {
@@ -35,5 +33,18 @@ export abstract class BaseServices<T> implements IServices<T> {
       throw error;
     }
   }
-  //  abstract delete?(id: string): Promise<T | null>;
+
+  async create(body: T): Promise<T> {
+    try {
+      const newUser = new this.model(body);
+      const createNewUser = (await newUser.save()) as T;
+      return createNewUser;
+    } catch (error) {
+      if (error instanceof Error) {
+        const mongoErr = examinationMongoError(error);
+        throw mongoErr;
+      }
+      throw error;
+    }
+  }
 }

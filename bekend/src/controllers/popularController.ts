@@ -1,12 +1,17 @@
-import { ImgController } from "./imgController";
 import { Response, Request } from "express";
-import { PopularFoodServices } from "../services/imgServices";
 import PopularFoodsSchema from "../models/PopularFoods";
+import BaseController from "./baseController";
+import { IController } from "../interfase/controllerInterface";
+import { IPopularFoods } from "../interfase/modelsInterfase";
+import { BaseServices } from "../services/baseServices";
 
-class PopularFoodController extends ImgController {
-  override async read(req: Request, res: Response): Promise<void> {
+class PopularFoodController
+  extends BaseController<IPopularFoods>
+  implements IController
+{
+  async read(req: Request, res: Response): Promise<void> {
     try {
-      const popularServices = new PopularFoodServices(PopularFoodsSchema);
+      const popularServices = new BaseServices(PopularFoodsSchema);
       const collection = await popularServices.getAll();
       this.sendRes(res, 200, collection);
     } catch (error) {

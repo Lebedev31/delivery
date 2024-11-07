@@ -1,13 +1,17 @@
 import BaseController from "./baseController";
 import { Response, Request, NextFunction } from "express";
-import { SliderServices } from "../services/imgServices";
 import SliderShema from "../models/SliderShema";
 import { ISliderCollection } from "../interfase/modelsInterfase";
+import { IController } from "../interfase/controllerInterface";
+import { BaseServices } from "../services/baseServices";
 
-export class ImgController extends BaseController<ISliderCollection> {
+export class ImgController
+  extends BaseController<ISliderCollection>
+  implements IController
+{
   async read(req: Request, res: Response, next?: NextFunction): Promise<void> {
     try {
-      const sliderServices = new SliderServices(SliderShema);
+      const sliderServices = new BaseServices(SliderShema);
       const collection = await sliderServices.getAll();
       this.sendRes(res, 200, collection);
     } catch (error) {
@@ -15,29 +19,5 @@ export class ImgController extends BaseController<ISliderCollection> {
         this.handleError(error, res);
       }
     }
-  }
-
-  async delete(
-    req: Request,
-    res: Response,
-    next?: NextFunction
-  ): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
-
-  async update(
-    req: Request,
-    res: Response,
-    next?: NextFunction
-  ): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
-
-  async create(
-    req: Request,
-    res: Response,
-    next?: NextFunction
-  ): Promise<void> {
-    throw new Error("Method not implemented.");
   }
 }

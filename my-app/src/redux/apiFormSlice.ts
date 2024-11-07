@@ -7,7 +7,7 @@ export const apiFormSlice = createApi({
   endpoints: (builder) => ({
     createNewUser: builder.mutation<void, DataSubmit>({
       query: (newUser) => ({
-        url: "createUser",
+        url: "/createUser",
         method: "POST",
         body: newUser,
       }),
