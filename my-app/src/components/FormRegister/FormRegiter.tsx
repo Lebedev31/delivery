@@ -18,6 +18,7 @@ import {
   validationPassword,
 } from "./validationForm";
 import { useCreateNewUserMutation } from "../../redux/apiFormSlice";
+import RegisterSocial from "../RegisterSocial/RegisterSocial";
 
 function FormRegister() {
   const [createNewUser, { isLoading, isError, isSuccess }] =
@@ -54,7 +55,7 @@ function FormRegister() {
   const password = watch("password");
 
   useEffect(() => {
-    if (isSuccess || isError) {
+    if ((isSuccess || isError) && inputRef.current) {
       inputRef.current.value = "";
     }
   }, [isSuccess, isError]);
@@ -168,6 +169,11 @@ function FormRegister() {
             {errors.confirmPassword && (
               <span>{errors.confirmPassword.message}</span>
             )}
+          </div>
+
+          <div className="formregister__social">
+            <h2>Регистрация с помощью: </h2>
+            <RegisterSocial />
           </div>
 
           <Button sx={{ width: "320px" }} variant="contained" type="submit">

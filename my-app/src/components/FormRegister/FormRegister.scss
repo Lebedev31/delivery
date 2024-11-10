@@ -65,5 +65,17 @@
     .formregister__input:hover {
       box-shadow: 0 0 15px 9px rgba(3, 142, 59, 0.5);
     }
+
+    .formregister__social {
+      width: 320px;
+      margin-top: 7px;
+      h2 {
+        color: $color-text;
+        text-align: center;
+        font-size: 12px;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+      }
+    }
   }
 }

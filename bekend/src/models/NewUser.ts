@@ -14,12 +14,10 @@ const NewUserSchema = new Schema<INewUser>({
 
   password: {
     type: String,
-    required: true,
   },
 
   dateOfBirth: {
     type: String,
-    required: true,
   },
 });
 
