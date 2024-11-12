@@ -180,6 +180,10 @@ function FormRegister() {
             Завершить регистрацию
           </Button>
 
+          <Button sx={{ width: "320px" }} variant="contained">
+            <Link to="/login">Вернуться назад</Link>
+          </Button>
+
           <div className="formregister__status">
             <p style={{ color: "#932ab4" }}>
               {isLoading ? "...Регистрация пользователя" : null}

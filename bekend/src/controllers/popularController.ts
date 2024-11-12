@@ -2,13 +2,9 @@ import { Response, Request } from "express";
 import PopularFoodsSchema from "../models/PopularFoods";
 import BaseController from "./baseController";
 import { IController } from "../interfase/controllerInterface";
-import { IPopularFoods } from "../interfase/modelsInterfase";
 import { BaseServices } from "../services/baseServices";
 
-class PopularFoodController
-  extends BaseController<IPopularFoods>
-  implements IController
-{
+class PopularFoodController extends BaseController implements IController {
   async read(req: Request, res: Response): Promise<void> {
     try {
       const popularServices = new BaseServices(PopularFoodsSchema);

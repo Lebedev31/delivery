@@ -4,7 +4,7 @@ import { MongoDbError } from "../error/errorMongo";
 import { BaseCustomError } from "../error/errorBase";
 import { examinationCustomError } from "../error/errorBase";
 
-abstract class BaseController<T> {
+abstract class BaseController {
   protected sendRes<T>(res: Response, status: number, data: T | string) {
     res.status(status).json({ status, data });
   }

@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import passport from "passport";
 import ChekEnvVariables from "../middleware/checkEnvVariables";
-import JWT from "../utils/JWT";
+import userController from "../controllers/userController";
 
 const registerSocailRouter = Router();
 
@@ -18,10 +18,7 @@ registerSocailRouter.get(
     session: false,
     failureRedirect: "/register",
   }),
-
-  (req: Request, res: Response) => {
-    res.redirect("http://localhost:3000/register");
-  }
+  userController.read.bind(userController)
 );
 
 export default registerSocailRouter;

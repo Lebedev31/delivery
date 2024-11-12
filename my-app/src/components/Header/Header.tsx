@@ -93,7 +93,7 @@ function Header() {
           </svg>
         </div>
         <div>
-          <Link to="/register">
+          <Link to="/login">
             <svg
               width="15"
               height="24"

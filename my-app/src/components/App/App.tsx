@@ -14,6 +14,7 @@ import CategoryMenu from "../CategoryMenu/CategoryMenu";
 import IndividualFood from "../IndifidualFood/IndividualFood";
 import BasketMenu from "../BasketMenu/BasketMenu";
 import FormRegister from "../FormRegister/FormRegiter";
+import Login from "../FormRegister/Login";
 
 function App() {
   const active = useSelector((state: RootState) => state.main.isActive);
@@ -54,6 +55,7 @@ function App() {
           <Route path="/category/:id" element={<CategoryMenu />} />
           <Route path="/basket" element={<BasketMenu />} />
           <Route path="/register" element={<FormRegister />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </div>

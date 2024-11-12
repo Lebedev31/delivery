@@ -10,10 +10,7 @@ type RequestParam = {
   id: string;
 };
 
-class CategoryFoodController
-  extends BaseController<ICategoryFood>
-  implements IController
-{
+class CategoryFoodController extends BaseController implements IController {
   async read(req: Request<RequestParam>, res: Response): Promise<void> {
     if (!req.params.id) {
       res

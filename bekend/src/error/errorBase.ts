@@ -19,8 +19,8 @@ export class BadRequestError extends BaseCustomError {
 }
 
 export class UnauthorizedError extends BaseCustomError {
-  constructor(message = "Требуется авторизация") {
-    super("Требуется авторизаця", ErrorCodeEnum.UNAUTHORZED, "UNAUTHORZED");
+  constructor() {
+    super("Требуется авторизация", ErrorCodeEnum.UNAUTHORZED, "UNAUTHORZED");
   }
 }
 

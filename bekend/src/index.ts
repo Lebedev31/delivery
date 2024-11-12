@@ -7,7 +7,7 @@ import sliderRouter from "./routes/sliderRouter";
 import popularFoodRouter from "./routes/popularRouter";
 import categoryRouter from "./routes/categoryRouter";
 import formRouter from "./routes/formRouter";
-import passport from "passport";
+import cookieParser from "cookie-parser";
 import registerSocailRouter from "./routes/registerSocialRouter";
 import setupGoogleStrategy from "./config/passportConfig";
 
@@ -15,9 +15,14 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 4000;
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000", // URL вашего React приложения
+    credentials: true, // Важно для работы с куками
+  })
+);
+app.use(cookieParser());
 app.use(express.json());
-//app.use(passport.initialize());
 setupGoogleStrategy();
 dbMongoConnect();
 app.use("/img", express.static(path.join(__dirname, "img")));

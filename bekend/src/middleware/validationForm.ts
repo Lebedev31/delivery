@@ -44,6 +44,25 @@ class ValidationForm {
         .withMessage("Неверный формат даты"),
     ];
   }
+
+  static validationLogin(): ValidationChain[] {
+    return [
+      body("email")
+        .isEmail()
+        .withMessage("Неверный формат email")
+        .normalizeEmail(),
+
+      body("password")
+        .isLength({ min: 8, max: 40 })
+        .withMessage(
+          "Минимальный размер пароля 3 символа, максимальный размер 40"
+        )
+        .matches(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/)
+        .withMessage(
+          "Пароль должен содержать хотя бы одну строчную букву,заглавную букву,одну цифру, специальный символ"
+        ),
+    ];
+  }
 }
 
 export default ValidationForm;

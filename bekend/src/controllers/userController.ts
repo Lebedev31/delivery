@@ -5,9 +5,11 @@ import NewUserSchema from "../models/NewUser";
 import BaseController from "./baseController";
 import { IController } from "../interfase/controllerInterface";
 import bcrypt from "bcrypt";
-import { BadRequestError } from "../error/errorBase";
+import { BadRequestError, BaseCustomError } from "../error/errorBase";
+import JWT from "../utils/JWT";
+import { ErrorCodeEnum } from "../error/errorCode";
 
-class UserController extends BaseController<INewUser> implements IController {
+class UserController extends BaseController implements IController {
   async create(
     req: Request,
     res: Response,
@@ -33,6 +35,13 @@ class UserController extends BaseController<INewUser> implements IController {
       });
 
       if (newUser) {
+        const token = JWT(newUser);
+
+        res.cookie("token", token, {
+          httpOnly: true,
+          maxAge: 60 * 60 * 1000,
+          sameSite: "strict",
+        });
         this.sendRes(res, 201, "Пользователь создан");
       }
     } catch (error) {
@@ -41,6 +50,37 @@ class UserController extends BaseController<INewUser> implements IController {
       }
     }
   }
+
+  read(req: Request, res: Response, next?: NextFunction) {
+    try {
+      const user = req.user as INewUser;
+
+      if (!user) {
+        const error = new BaseCustomError(
+          "Произошла серверная ошибка",
+          ErrorCodeEnum.INTERVAL_SERVER_ERROR,
+          "INTERVAL_SERVER_ERROR"
+        );
+        res.status(500).json(error);
+      } else {
+        const token = JWT(user);
+
+        res.cookie("token", token, {
+          httpOnly: true,
+          maxAge: 60 * 60 * 1000,
+          sameSite: "strict",
+        });
+
+        return res.redirect("http://localhost:3000/register");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        this.handleError(error, res);
+      }
+    }
+  }
+
+  checkAuth;
 }
 
 const userController = new UserController();

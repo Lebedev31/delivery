@@ -4,7 +4,7 @@ import yandex from "../../img/яндекс.png";
 import vk from "../../img/vk.png";
 
 function RegisterSocial() {
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     window.location.href = "http://localhost:8080/auth/google";
   };
 
