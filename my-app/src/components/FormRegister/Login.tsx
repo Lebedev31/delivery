@@ -3,11 +3,31 @@ import { TextField } from "@mui/material";
 import "dayjs/locale/ru";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import RegisterSocial from "../RegisterSocial/RegisterSocial";
 import { Button } from "@mui/material";
+import { useCheckLoginMutation } from "../../redux/apiFormSlice";
+import { Logout } from "../../redux/types";
+import { useForm } from "react-hook-form";
 
 function Login() {
+  const navigate = useNavigate();
+  const [checkLogin, { isLoading, isError, isSuccess }] =
+    useCheckLoginMutation();
+  const { register, reset, handleSubmit } = useForm<Logout>();
+
+  async function onSubmit(data: Logout) {
+    try {
+      if (data) {
+        await checkLogin(data).unwrap();
+        navigate("/personal");
+        reset();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <section style={{ gridColumn: "1/13" }}>
       <Header />
@@ -16,13 +36,14 @@ function Login() {
         <p className="formregister__home">
           <Link to="/">Главная</Link>
         </p>
-        <form className="formregister__form">
+        <form className="formregister__form" onSubmit={handleSubmit(onSubmit)}>
           <TextField
             id="outlined-basic"
             label="Email"
             variant="filled"
             className="formregister__input"
             color="secondary"
+            {...register("email")}
           />
           <TextField
             id="outlined-basic"
@@ -30,6 +51,7 @@ function Login() {
             variant="filled"
             className="formregister__input"
             color="secondary"
+            {...register("password")}
           />
 
           <div className="formregister__social">

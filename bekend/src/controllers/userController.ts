@@ -5,9 +5,14 @@ import NewUserSchema from "../models/NewUser";
 import BaseController from "./baseController";
 import { IController } from "../interfase/controllerInterface";
 import bcrypt from "bcrypt";
-import { BadRequestError, BaseCustomError } from "../error/errorBase";
+import {
+  BadRequestError,
+  BaseCustomError,
+  NotFoundError,
+} from "../error/errorBase";
 import JWT from "../utils/JWT";
 import { ErrorCodeEnum } from "../error/errorCode";
+import { createCookie } from "../utils/JWT";
 
 class UserController extends BaseController implements IController {
   async create(
@@ -36,12 +41,7 @@ class UserController extends BaseController implements IController {
 
       if (newUser) {
         const token = JWT(newUser);
-
-        res.cookie("token", token, {
-          httpOnly: true,
-          maxAge: 60 * 60 * 1000,
-          sameSite: "strict",
-        });
+        createCookie(res, token);
         this.sendRes(res, 201, "Пользователь создан");
       }
     } catch (error) {
@@ -65,13 +65,9 @@ class UserController extends BaseController implements IController {
       } else {
         const token = JWT(user);
 
-        res.cookie("token", token, {
-          httpOnly: true,
-          maxAge: 60 * 60 * 1000,
-          sameSite: "strict",
-        });
+        createCookie(res, token);
 
-        return res.redirect("http://localhost:3000/register");
+        return res.redirect("http://localhost:3000/personal");
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -80,7 +76,37 @@ class UserController extends BaseController implements IController {
     }
   }
 
-  checkAuth;
+  async checkLogin(req: Request, res: Response) {
+    const { password, email }: INewUser = req.body;
+    if (!password && !email) {
+      const err = new BadRequestError();
+      res.status(err.statusCode).json(err);
+    }
+    try {
+      const userServices = new BaseServices(NewUserSchema);
+      const user = await userServices.getId(email, email);
+
+      if (user.length === 0) {
+        const err = new NotFoundError();
+        res.status(err.statusCode).json(err);
+      } else {
+        const isMatch = await bcrypt.compare(password, user[0].password);
+        if (isMatch) {
+          const token = JWT(user[0]);
+          createCookie(res, token);
+          res.redirect("http://localhost:3000/personal");
+        } else {
+          res
+            .status(ErrorCodeEnum.UNAUTHORZED)
+            .json({ message: "Невверный пароль" });
+        }
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        this.handleError(error, res);
+      }
+    }
+  }
 }
 
 const userController = new UserController();

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { DataSubmit } from "./types";
+import { DataSubmit, Logout } from "./types";
 
 export const apiFormSlice = createApi({
   reducerPath: "apiFormSlice",
@@ -12,7 +12,15 @@ export const apiFormSlice = createApi({
         body: newUser,
       }),
     }),
+
+    checkLogin: builder.mutation<void, Logout>({
+      query: (data) => ({
+        url: "/login",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useCreateNewUserMutation } = apiFormSlice;
+export const { useCreateNewUserMutation, useCheckLoginMutation } = apiFormSlice;

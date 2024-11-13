@@ -55,3 +55,5 @@ export type DataSubmit = {
   password: string;
   confirmPassword?: string;
 };
+
+export type Logout = Pick<DataSubmit, "email" | "password">;

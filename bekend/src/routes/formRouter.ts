@@ -12,6 +12,11 @@ formRouter.post(
   userController.create.bind(userController)
 );
 
-formRouter.post("/login", ValidationForm.validationLogin(), validate);
+formRouter.post(
+  "/login",
+  ValidationForm.validationLogin(),
+  validate,
+  userController.checkLogin.bind(userController)
+);
 
 export default formRouter;

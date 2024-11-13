@@ -21,9 +21,9 @@ export class BaseServices<T> implements IServices<T> {
   }
   async getId(id: string, property: string): Promise<T[] | []> {
     try {
-      const findCollection = (await this.model
-        .find({ property: id })
-        .lean()) as T[];
+      const filter: Record<string, any> = {};
+      filter[property] = id;
+      const findCollection = (await this.model.find(filter).lean()) as T[];
       return findCollection.length ? findCollection : [];
     } catch (error) {
       if (error instanceof Error) {

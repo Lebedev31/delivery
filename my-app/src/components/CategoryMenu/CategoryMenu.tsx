@@ -18,6 +18,7 @@ function CategoryMenu() {
   );
 
   const [dataArray, setDataArray] = useState<ICategoryMenu[]>([]);
+  console.log(dataArray);
 
   useEffect(() => {
     if (data && !isLoading) {
