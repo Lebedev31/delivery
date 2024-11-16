@@ -1,5 +1,4 @@
 import "./FormRegister.scss";
-import { TextField } from "@mui/material";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
@@ -8,9 +7,8 @@ import Header from "../Header/Header";
 import { useRef, useEffect } from "react";
 import Footer from "../Footer/Footer";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
-import { DataSubmit } from "../../redux/types";
 import {
   validationName,
   validationDateOfBirth,
@@ -19,12 +17,18 @@ import {
 } from "./validationForm";
 import { useCreateNewUserMutation } from "../../redux/apiFormSlice";
 import RegisterSocial from "../RegisterSocial/RegisterSocial";
+import {
+  standartError,
+  UniversalRTKError,
+  DataSubmit,
+} from "../../redux/types";
 
 function FormRegister() {
-  const [createNewUser, { isLoading, isError, isSuccess }] =
+  const [createNewUser, { isLoading, isError, isSuccess, error }] =
     useCreateNewUserMutation();
+  const fetchError = error as UniversalRTKError;
 
-  const inputRef = useRef<HTMLInputElement | null>(null); // Реф для TextField
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const {
     register,
@@ -45,8 +49,6 @@ function FormRegister() {
     try {
       createNewUser(user).unwrap();
       reset();
-      const element = document.querySelector("#id") as HTMLInputElement;
-      console.log(element);
     } catch (error) {
       console.log(error);
     }
@@ -176,11 +178,15 @@ function FormRegister() {
             <RegisterSocial />
           </div>
 
-          <Button sx={{ width: "320px" }} variant="contained" type="submit">
+          <Button
+            className="formregister__button"
+            variant="contained"
+            type="submit"
+          >
             Завершить регистрацию
           </Button>
 
-          <Button sx={{ width: "320px" }} variant="contained">
+          <Button variant="contained" className="formregister__button">
             <Link to="/login">Вернуться назад</Link>
           </Button>
 
@@ -189,11 +195,18 @@ function FormRegister() {
               {isLoading ? "...Регистрация пользователя" : null}
             </p>
             <p style={{ color: "red" }}>
-              {isError ? "Произошла ошибка" : null}
+              {isError ? standartError(fetchError) : null}
             </p>
 
             <p style={{ color: "green" }}>
-              {isSuccess ? "Регистрация завершена" : null}
+              {isSuccess && (
+                <>
+                  Регистрация завершена,
+                  <Link style={{ color: "red" }} to="/personal">
+                    перейдите по ссылке
+                  </Link>
+                </>
+              )}
             </p>
           </div>
         </form>

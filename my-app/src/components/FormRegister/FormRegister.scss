@@ -8,6 +8,13 @@
     font-size: 50px;
     text-transform: uppercase;
     text-align: center;
+    @media (max-width: 840px) {
+      font-size: 30px;
+    }
+
+    @media (max-width: 500px) {
+      font-size: 20px;
+    }
   }
 
   .formregister__home {
@@ -17,6 +24,9 @@
     text-align: left;
     margin: 15px auto;
     margin-bottom: 25px;
+    @media (max-width: 500px) {
+      width: 280px;
+    }
     a {
       color: $color-text;
     }
@@ -31,6 +41,10 @@
     flex-direction: column;
     position: relative;
     gap: 5px;
+
+    @media (max-width: 500px) {
+      width: 300px;
+    }
 
     .formregister__error-message {
       span {
@@ -60,6 +74,16 @@
     .formregister__input {
       width: 320px;
       background-color: $color-text;
+      @media (max-width: 500px) {
+        width: 280px;
+      }
+    }
+
+    .formregister__button {
+      width: 320px;
+      @media (max-width: 500px) {
+        width: 280px;
+      }
     }
 
     .formregister__input:hover {

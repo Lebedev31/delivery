@@ -9,7 +9,9 @@ import categoryRouter from "./routes/categoryRouter";
 import formRouter from "./routes/formRouter";
 import cookieParser from "cookie-parser";
 import registerSocailRouter from "./routes/registerSocialRouter";
-import setupGoogleStrategy from "./config/passportConfig";
+import setupGoogleStrategy, {
+  setupYandexStrategy,
+} from "./config/passportConfig";
 
 dotenv.config();
 
@@ -24,6 +26,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 setupGoogleStrategy();
+setupYandexStrategy();
 dbMongoConnect();
 app.use("/img", express.static(path.join(__dirname, "img")));
 app.use("/popular", popularFoodRouter);

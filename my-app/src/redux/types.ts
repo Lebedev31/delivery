@@ -1,3 +1,4 @@
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 export type Active = {
   isActive: boolean;
 };
@@ -57,3 +58,55 @@ export type DataSubmit = {
 };
 
 export type Logout = Pick<DataSubmit, "email" | "password">;
+
+type ObjectErrorValidation = {
+  data: {
+    errors: [
+      {
+        msg: string;
+        path: string;
+        location: string;
+        value: string;
+        type: string;
+      }
+    ];
+  };
+};
+
+type StandartObjectError = {
+  data: {
+    msg: string;
+    nameError: string;
+    statusError: string;
+  };
+};
+
+type CustomObjectError = {
+  data: {
+    msg: string;
+  };
+};
+
+type RTKErrorOne = ObjectErrorValidation & FetchBaseQueryError;
+type RTKErrorTwo = StandartObjectError & FetchBaseQueryError;
+type RTKErrorThree = CustomObjectError & FetchBaseQueryError;
+
+export type UniversalRTKError = RTKErrorOne | RTKErrorThree | RTKErrorTwo;
+
+export function standartError(error: UniversalRTKError): string {
+  if (typeof error.data === "object") {
+    if ("errors" in error.data) {
+      return error.data.errors[0].msg;
+    }
+
+    if ("code" in error.data) {
+      return error.data.msg;
+    }
+
+    if ("msg" in error.data && !("code" in error.data)) {
+      return error.data.msg;
+    }
+  }
+
+  return "Неизвестная ошибка";
+}

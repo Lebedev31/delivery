@@ -2,7 +2,7 @@ import { IServices } from "../interfase/servicesInterface";
 import { Model } from "mongoose";
 import { examinationMongoError } from "../error/errorMongo";
 
-export class BaseServices<T> implements IServices<T> {
+export class BaseServices<T extends object> implements IServices<T> {
   private model: Model<T>;
   constructor(model: Model<T>) {
     this.model = model;

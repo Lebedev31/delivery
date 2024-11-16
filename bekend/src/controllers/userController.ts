@@ -23,7 +23,7 @@ class UserController extends BaseController implements IController {
     try {
       const { name, email, password, dateOfBirth }: INewUser = req.body;
 
-      if (!name && !email && !password && !dateOfBirth) {
+      if (!name || !email || !password || !dateOfBirth) {
         const error = new BadRequestError();
         res.status(error.statusCode).json(error);
       }
@@ -32,6 +32,7 @@ class UserController extends BaseController implements IController {
       const hashePassword = await bcrypt.hash(password, saltRound);
 
       const userServices = new BaseServices(NewUserSchema);
+
       const newUser = await userServices.create({
         name,
         email,
@@ -84,8 +85,7 @@ class UserController extends BaseController implements IController {
     }
     try {
       const userServices = new BaseServices(NewUserSchema);
-      const user = await userServices.getId(email, email);
-
+      const user = await userServices.getId(email, "email");
       if (user.length === 0) {
         const err = new NotFoundError();
         res.status(err.statusCode).json(err);
@@ -94,11 +94,13 @@ class UserController extends BaseController implements IController {
         if (isMatch) {
           const token = JWT(user[0]);
           createCookie(res, token);
-          res.redirect("http://localhost:3000/personal");
+          res.status(200).json({
+            msg: "Пользователь успешно авторизирован в личном кабинете",
+          });
         } else {
           res
             .status(ErrorCodeEnum.UNAUTHORZED)
-            .json({ message: "Невверный пароль" });
+            .json({ msg: "Невверный пароль" });
         }
       }
     } catch (error) {

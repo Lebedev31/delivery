@@ -7,7 +7,12 @@ dotenv.config();
 
 class ChekEnvVariables {
   static check(req: Request, res: Response, next: NextFunction) {
-    if (!process.env.GOOGLE_CLIENT_ID && !process.env.GOOGLE_CLIENT_SECRET) {
+    if (
+      !process.env.GOOGLE_CLIENT_ID ||
+      !process.env.GOOGLE_CLIENT_SECRET ||
+      !process.env.YANDEX_CLIENT_ID ||
+      !process.env.YANDEX_CLIENT_SECRET
+    ) {
       const error = new BaseCustomError(
         "Переменных окружения не существует",
         ErrorCodeEnum.INTERVAL_SERVER_ERROR,

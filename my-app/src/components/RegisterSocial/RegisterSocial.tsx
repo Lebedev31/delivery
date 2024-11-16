@@ -4,16 +4,20 @@ import yandex from "../../img/яндекс.png";
 import vk from "../../img/vk.png";
 
 function RegisterSocial() {
-  const handleButtonClick = async () => {
+  const googleButtonClick = () => {
     window.location.href = "http://localhost:8080/auth/google";
+  };
+
+  const yandexButtonClick = () => {
+    window.location.href = "http://localhost:8080/auth/yandex";
   };
 
   return (
     <div className="register-social">
-      <div onClick={handleButtonClick} className="register-social__img">
+      <div onClick={googleButtonClick} className="register-social__img">
         <img src={google} alt="гугл" />
       </div>
-      <div className="register-social__img">
+      <div onClick={yandexButtonClick} className="register-social__img">
         <img src={yandex} alt="яндекс" />
       </div>
       <div className="register-social__img">

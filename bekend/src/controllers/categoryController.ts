@@ -13,9 +13,7 @@ type RequestParam = {
 class CategoryFoodController extends BaseController implements IController {
   async read(req: Request<RequestParam>, res: Response): Promise<void> {
     if (!req.params.id) {
-      res
-        .status(ErrorCodeEnum.BAD_REQUEST)
-        .json({ message: "Неправильный id" });
+      res.status(ErrorCodeEnum.BAD_REQUEST).json({ msg: "Неправильный id" });
     }
 
     const id = req.params.id;

@@ -2,11 +2,11 @@ import { ErrorCodeEnum } from "./errorCode";
 
 export class BaseCustomError extends Error {
   constructor(
-    public readonly message: string,
+    public readonly msg: string,
     public readonly statusCode: number,
     public readonly code: string
   ) {
-    super(message);
+    super(msg);
     this.name = this.constructor.name;
     Object.setPrototypeOf(this, BaseCustomError);
   }

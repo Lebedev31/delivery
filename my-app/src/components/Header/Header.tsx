@@ -72,7 +72,7 @@ function Header() {
       </nav>
 
       <div className="header__info">
-        <div>
+        <div className="header_s">
           <svg
             width="24"
             height="24"

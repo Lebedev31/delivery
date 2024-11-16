@@ -21,4 +21,22 @@ registerSocailRouter.get(
   userController.read.bind(userController)
 );
 
+registerSocailRouter.get(
+  "/yandex",
+  ChekEnvVariables.check,
+  passport.authenticate("yandex", {
+    scope: ["login:info", "login:email"],
+  })
+);
+
+registerSocailRouter.get(
+  "/yandex/callback",
+  ChekEnvVariables.check,
+  passport.authenticate("yandex", {
+    session: false,
+    failureRedirect: "/register",
+  }),
+  userController.read.bind(userController)
+);
+
 export default registerSocailRouter;

@@ -11,22 +11,22 @@ abstract class BaseController {
 
   protected handleError(err: Error, res: Response) {
     if (err instanceof MongoDbError) {
-      const message = err.message;
+      const msg = err.message;
       const status = err.statusCode;
-      const mongoStatusError = err.code;
+      const statusError = err.code;
       const nameError = err.name;
-      res.status(status).json({ message, nameError, mongoStatusError });
+      res.status(status).json({ msg, nameError, statusError });
     }
 
     if (err instanceof BaseCustomError) {
       const baseError = examinationCustomError(err);
 
       if (baseError instanceof BaseCustomError) {
-        const message = baseError.message;
+        const msg = baseError.message;
         const status = baseError.statusCode;
-        const statusError = baseError.code;
+        const statusError = baseError.statusCode;
         const nameError = baseError.name;
-        res.status(status).json({ message, nameError, statusError });
+        res.status(status).json({ msg, nameError, statusError });
       }
     }
   }
