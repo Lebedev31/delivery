@@ -1,15 +1,17 @@
-import './InputComponent.scss';
+import "./InputComponent.scss";
 
 interface PropsStyleInput {
   props?: {
     [key: string]: string;
   };
   placeholder?: string;
+  id?: string;
 }
 
 function InputComponent({
   props = {},
-  placeholder = 'Иван Иваныч Иванов проснулся с петухами',
+  placeholder = "",
+  id = "",
 }: PropsStyleInput) {
   return (
     <>
@@ -18,6 +20,7 @@ function InputComponent({
         className="input__style"
         placeholder={placeholder}
         style={props}
+        id={id}
       />
     </>
   );

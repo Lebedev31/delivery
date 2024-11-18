@@ -75,7 +75,7 @@ function IndividualFood() {
               />
               <div className="individual__price">{dataObject?.sum}p</div>
               <div className="individual__basket">
-                <Link to="/basket">
+                <Link to="/payment">
                   <Basket />
                 </Link>
               </div>

@@ -16,6 +16,7 @@ import BasketMenu from "../BasketMenu/BasketMenu";
 import FormRegister from "../FormRegister/FormRegiter";
 import Login from "../FormRegister/Login";
 import PersonalAccount from "../PersonalAccount/PersonalAccount";
+import Payment from "../Payment/Payment";
 
 function App() {
   const active = useSelector((state: RootState) => state.main.isActive);
@@ -58,6 +59,7 @@ function App() {
           <Route path="/register" element={<FormRegister />} />
           <Route path="/login" element={<Login />} />
           <Route path="/personal" element={<PersonalAccount />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
       </Router>
     </div>
