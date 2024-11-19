@@ -8,13 +8,13 @@ class AuthCheck {
   static checkTokenJwt(req: Request, res: Response, next: NextFunction) {
     try {
       const token: string | undefined = req.cookies?.token;
-
       if (!token) {
-        res.redirect("http://localhost:3000/register");
+        const error = new UnauthorizedError();
+        res.status(error.statusCode).json({ redirect: "/login" });
       } else {
         const SECRET = process.env.JWT_SECRET as string;
         const decoded = jwt.verify(token, SECRET);
-        next();
+        res.status(200).json({ redirect: "/personal" });
       }
     } catch (error) {
       if (error instanceof Error) {

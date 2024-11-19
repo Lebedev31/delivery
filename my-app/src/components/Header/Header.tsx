@@ -8,10 +8,15 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import img1 from "../../img/галочка.png";
 import AddinationalMenu from "./AddinationalMenu";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLazyGetPersonalQuery } from "../../redux/apiFormSlice";
 
 function Header() {
+  const [trigger, { isSuccess, data, isError, error }] =
+    useLazyGetPersonalQuery();
+  const [redirect, setRedirect] = useState("");
+  const navigate = useNavigate();
   const active = useSelector((state: RootState) => state.main.isActive);
   const basketCount = useSelector(
     (state: RootState) => state.basketState.dataArray.length
@@ -21,6 +26,27 @@ function Header() {
 
   const categoryArray1 = ["Горячие блюда", "Супы", "Хинкали"];
   const categoryArray2 = ["Холодные закуски", "Салаты", "Соусы"];
+
+  async function handerClick() {
+    try {
+      await trigger().unwrap();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    if (isSuccess && data) {
+      setRedirect(data.redirect);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (redirect) {
+      navigate("/personal");
+    }
+  }, [redirect]);
+
   return (
     <header className={`header ${active ? "header__active" : ""}`}>
       <div className="header__logo">
@@ -92,25 +118,23 @@ function Header() {
             />
           </svg>
         </div>
-        <div>
-          <Link to="/login">
-            <svg
-              width="15"
-              height="24"
-              viewBox="0 0 15 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M7.5 9.28132C4.98992 9.28132 2.93347 7.19149 2.93347 4.64066C2.96371 2.08983 4.98992 0 7.5 0C10.0101 0 12.0665 2.08983 12.0665 4.64066C12.0665 7.19149 10.0403 9.28132 7.5 9.28132ZM7.5 2.08983C6.10887 2.08983 4.98992 3.22695 4.98992 4.64066C4.98992 6.05437 6.10887 7.19149 7.5 7.19149C8.89113 7.19149 10.0101 6.05437 10.0101 4.64066C10.0101 3.22695 8.89113 2.08983 7.5 2.08983Z"
-                fill="white"
-              />
-              <path
-                d="M12.9738 24V18.2553C12.9738 15.182 10.5242 12.7234 7.53024 12.7234C4.50605 12.7234 2.08669 15.2128 2.08669 18.2553V24H0V18.2553C0 14.0449 3.35685 10.6336 7.5 10.6336C11.6431 10.6336 15 14.0449 15 18.2553V24H12.9738Z"
-                fill="white"
-              />
-            </svg>
-          </Link>
+        <div onClick={handerClick}>
+          <svg
+            width="15"
+            height="24"
+            viewBox="0 0 15 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7.5 9.28132C4.98992 9.28132 2.93347 7.19149 2.93347 4.64066C2.96371 2.08983 4.98992 0 7.5 0C10.0101 0 12.0665 2.08983 12.0665 4.64066C12.0665 7.19149 10.0403 9.28132 7.5 9.28132ZM7.5 2.08983C6.10887 2.08983 4.98992 3.22695 4.98992 4.64066C4.98992 6.05437 6.10887 7.19149 7.5 7.19149C8.89113 7.19149 10.0101 6.05437 10.0101 4.64066C10.0101 3.22695 8.89113 2.08983 7.5 2.08983Z"
+              fill="white"
+            />
+            <path
+              d="M12.9738 24V18.2553C12.9738 15.182 10.5242 12.7234 7.53024 12.7234C4.50605 12.7234 2.08669 15.2128 2.08669 18.2553V24H0V18.2553C0 14.0449 3.35685 10.6336 7.5 10.6336C11.6431 10.6336 15 14.0449 15 18.2553V24H12.9738Z"
+              fill="white"
+            />
+          </svg>
         </div>
         <div style={{ position: "relative" }}>
           <div

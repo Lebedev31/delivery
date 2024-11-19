@@ -8,8 +8,10 @@ import visa from "../../img/visa.png";
 import mir from "../../img/mir.png";
 import applePay from "../../img/pay.png";
 import { Button } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 
 function Payment() {
+  const media = useMediaQuery("(max-width: 600px)");
   return (
     <section style={{ gridColumn: "1/13" }}>
       <Header />
@@ -59,7 +61,7 @@ function Payment() {
               </label>
               <InputComponent
                 id="street"
-                props={{ width: "360px", color: "black" }}
+                props={{ width: media ? "330px" : "360px", color: "black" }}
               />
             </div>
 
@@ -89,7 +91,7 @@ function Payment() {
                 Телефон
               </label>
               <InputComponent
-                props={{ width: "360px", color: "black" }}
+                props={{ width: media ? "330px" : "360px", color: "black" }}
                 id="tel"
               />
             </div>

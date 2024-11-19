@@ -1,9 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { DataSubmit, Logout } from "./types";
+import { DataSubmit, Logout, LoginAuthRedirect } from "./types";
 
 export const apiFormSlice = createApi({
   reducerPath: "apiFormSlice",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080/form" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:8080/form",
+    credentials: "include",
+  }),
   endpoints: (builder) => ({
     createNewUser: builder.mutation<void, DataSubmit>({
       query: (newUser) => ({
@@ -20,7 +23,17 @@ export const apiFormSlice = createApi({
         body: data,
       }),
     }),
+
+    getPersonal: builder.query<LoginAuthRedirect, void>({
+      query: () => ({
+        url: "/personal",
+      }),
+    }),
   }),
 });
 
-export const { useCreateNewUserMutation, useCheckLoginMutation } = apiFormSlice;
+export const {
+  useCreateNewUserMutation,
+  useCheckLoginMutation,
+  useLazyGetPersonalQuery,
+} = apiFormSlice;

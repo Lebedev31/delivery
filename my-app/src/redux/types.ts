@@ -110,3 +110,7 @@ export function standartError(error: UniversalRTKError): string {
 
   return "Неизвестная ошибка";
 }
+
+export type LoginAuthRedirect = {
+  redirect: string;
+};

@@ -17,9 +17,10 @@ function JWT(user: INewUser): string {
 
 export function createCookie(res: Response, token: string) {
   res.cookie("token", token, {
-    httpOnly: true,
+    //  httpOnly: true,
     maxAge: 60 * 60 * 1000,
-    sameSite: "strict",
+    secure: false,
+    //  sameSite: "strict",
   });
 }
 

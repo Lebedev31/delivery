@@ -30,7 +30,7 @@ function App() {
       document.body.style.overflow = "auto";
     }
   }, [active]);
-
+  console.log(document.cookie);
   return (
     <div className="container">
       <Router>
