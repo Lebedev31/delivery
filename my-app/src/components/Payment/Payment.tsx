@@ -32,7 +32,7 @@ function Payment() {
           <div className="payment__block">
             <div className="payment__item">
               <div className="payment__title">
-                <p>Бесплатная доставка</p>
+                <p>Бесконтактная доставка</p>
                 <p>300 ₽</p>
               </div>
               <p className="payment__text">
@@ -144,6 +144,8 @@ function Payment() {
             >
               Подтвердить заказ
             </Button>
+
+            <p>Сумма заказа:</p>
           </div>
         </div>
       </div>
