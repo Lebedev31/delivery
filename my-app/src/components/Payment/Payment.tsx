@@ -3,6 +3,11 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Link } from "react-router-dom";
 import InputComponent from "../InputComponent/InputComponent";
+import mastercard from "../../img/mastercard.png";
+import visa from "../../img/visa.png";
+import mir from "../../img/mir.png";
+import applePay from "../../img/pay.png";
+import { Button } from "@mui/material";
 
 function Payment() {
   return (
@@ -88,7 +93,58 @@ function Payment() {
                 id="tel"
               />
             </div>
+            <div className="label__style transform-area ">
+              <label
+                htmlFor="reviews"
+                className="payment__label"
+                style={{ width: "120px" }}
+              >
+                Комментарий к заказу
+              </label>
+              <textarea className="payment__textarea" id="reviews"></textarea>
+            </div>
           </form>
+        </div>
+
+        <div className="payment__system">
+          <h2>Оплата</h2>
+          <hr />
+          <div className="payment__system-block">
+            <div className="payment__system__item-1">
+              <input type="radio" name="payment" />
+
+              <div className="payment__system__item-1-block">
+                <p className="payment__system__text">
+                  Банковские карты / Электронные деньги / Другое
+                </p>
+                <div className="payment__system-link">
+                  <img src={mastercard} />
+                  <img src={visa} />
+                  <img src={mir} />
+                  <img src={applePay} />
+                </div>
+              </div>
+            </div>
+            <div className="payment__system__item-1 height-block">
+              <input type="radio" name="payment" />
+              <p className="payment__system__text">Наличными курьеру</p>
+            </div>
+            <div className="payment__system__item-1 height-block">
+              <input type="radio" name="payment" />
+              <p className="payment__system__text">Картой курьеру</p>
+            </div>
+          </div>
+
+          <div className="payment__system-button">
+            <Button
+              sx={{
+                backgroundColor: "rgba(251, 209, 62, 1)",
+                color: "black",
+              }}
+            >
+              Подтвердить заказ
+            </Button>
+          </div>
         </div>
       </div>
       <Footer />
