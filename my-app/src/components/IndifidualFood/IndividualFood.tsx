@@ -22,7 +22,9 @@ type LinkState = {
 function IndividualFood() {
   const location = useLocation();
   const { imgPath, price, description, category, title, weight }: LinkState =
-    location.state;
+    location.state || {};
+
+  console.log(imgPath);
   const dispatch: AppDispatch = useDispatch();
   const data = useSelector((state: RootState) => state.basketState.dataArray);
   const dataObject = data.filter((item) => item.title === title)[0];

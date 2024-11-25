@@ -12,6 +12,10 @@ export interface Slider {
   price: string;
 }
 
+export type OptionalSlider = Omit<Partial<Slider>, "_id" | "imgPath"> & {
+  file: File | null;
+};
+
 export type SliderResponseData = {
   status: number;
   data: Slider[];
@@ -112,5 +116,14 @@ export function standartError(error: UniversalRTKError): string {
 }
 
 export type LoginAuthRedirect = {
-  redirect: string;
+  msg: string;
+};
+
+export type User = {
+  name: string;
+  email: string;
+};
+
+export type ResponseUser = {
+  data: User;
 };

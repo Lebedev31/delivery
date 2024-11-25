@@ -1,0 +1,21 @@
+.admin-block {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Две колонки равной ширины */
+  grid-auto-rows: 300px; /* Высота каждого ряда фиксирована */
+  gap: 30px;
+  .admin-block__item {
+    background-color: antiquewhite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    h2 {
+      font-size: 30px;
+    }
+  }
+
+  .admin-block__item:hover {
+    transform: scale(1.02);
+  }
+}

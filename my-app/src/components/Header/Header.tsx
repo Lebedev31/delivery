@@ -10,11 +10,12 @@ import img1 from "../../img/галочка.png";
 import AddinationalMenu from "./AddinationalMenu";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useLazyGetPersonalQuery } from "../../redux/apiFormSlice";
+import { useLazyAuthPersonalQuery } from "../../redux/apiPersonalAreaSlice";
+import { UniversalRTKError, standartError } from "../../redux/types";
 
 function Header() {
   const [trigger, { isSuccess, data, isError, error }] =
-    useLazyGetPersonalQuery();
+    useLazyAuthPersonalQuery();
   const [redirect, setRedirect] = useState("");
   const navigate = useNavigate();
   const active = useSelector((state: RootState) => state.main.isActive);
@@ -23,6 +24,7 @@ function Header() {
   );
   const [activeMenuHot, setActiveMenuHot] = useState(false);
   const [activeMenuCold, setActiveMenuCold] = useState(false);
+  const fetchError = error as UniversalRTKError;
 
   const categoryArray1 = ["Горячие блюда", "Супы", "Хинкали"];
   const categoryArray2 = ["Холодные закуски", "Салаты", "Соусы"];
@@ -36,16 +38,25 @@ function Header() {
   }
 
   useEffect(() => {
-    if (isSuccess && data) {
-      setRedirect(data.redirect);
+    if (data) {
+      setRedirect(data.msg);
     }
-  }, [data]);
+
+    if (error) {
+      const redirectErr = standartError(fetchError);
+      setRedirect(redirectErr);
+    }
+  }, [data, error]);
 
   useEffect(() => {
-    if (redirect) {
-      navigate("/personal");
+    if (isSuccess) {
+      navigate(redirect);
     }
-  }, [redirect]);
+
+    if (isError) {
+      navigate(redirect);
+    }
+  }, [isError, isSuccess, redirect]);
 
   return (
     <header className={`header ${active ? "header__active" : ""}`}>

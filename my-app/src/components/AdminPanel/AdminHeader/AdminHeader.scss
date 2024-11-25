@@ -1,0 +1,21 @@
+$blue: #ff9900;
+$gray: #06f3bc;
+
+// Миксин для градиента
+@mixin smooth-gradient($start-color, $end-color, $angle: 90deg) {
+  background: linear-gradient($angle, $start-color, $end-color);
+}
+
+.admin-header {
+  width: 100%;
+  height: 30px;
+  @include smooth-gradient($blue, $gray);
+  .admin-header__link {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-items: center;
+    height: auto;
+  }
+}

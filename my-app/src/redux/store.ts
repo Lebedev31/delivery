@@ -5,7 +5,7 @@ import { apiPopularFoodSlice } from "./apiPopularSlice";
 import { apiCategorySlice } from "./apiCategorySlice";
 import basketReducer from "../redux/basketSlice";
 import { apiFormSlice } from "./apiFormSlice";
-import { apiRegisterSocialSlice } from "./apiRegisterSocial";
+import { apiPersonalAreaSlice } from "./apiPersonalAreaSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +15,7 @@ export const store = configureStore({
     [apiPopularFoodSlice.reducerPath]: apiPopularFoodSlice.reducer,
     [apiCategorySlice.reducerPath]: apiCategorySlice.reducer,
     [apiFormSlice.reducerPath]: apiFormSlice.reducer,
-    [apiRegisterSocialSlice.reducerPath]: apiRegisterSocialSlice.reducer,
+    [apiPersonalAreaSlice.reducerPath]: apiPersonalAreaSlice.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -24,7 +24,7 @@ export const store = configureStore({
       apiPopularFoodSlice.middleware,
       apiCategorySlice.middleware,
       apiFormSlice.middleware,
-      apiRegisterSocialSlice.middleware
+      apiPersonalAreaSlice.middleware
     ),
 });
 

@@ -3,18 +3,21 @@ import { UnauthorizedError } from "../error/errorBase";
 import { examinationCustomError } from "../error/errorBase";
 import { BaseCustomError } from "../error/errorBase";
 import jwt from "jsonwebtoken";
+import { INewUser } from "../interfase/modelsInterfase";
 
 class AuthCheck {
   static checkTokenJwt(req: Request, res: Response, next: NextFunction) {
     try {
       const token: string | undefined = req.cookies?.token;
       if (!token) {
-        const error = new UnauthorizedError();
-        res.status(error.statusCode).json({ redirect: "/login" });
+        req.msg = "/login";
+        next();
       } else {
         const SECRET = process.env.JWT_SECRET as string;
-        const decoded = jwt.verify(token, SECRET);
-        res.status(200).json({ redirect: "/personal" });
+        const decoded = jwt.verify(token, SECRET) as INewUser;
+        req.msg = "/personal";
+        req.email = decoded.email;
+        next();
       }
     } catch (error) {
       if (error instanceof Error) {

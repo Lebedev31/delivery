@@ -16,24 +16,14 @@ export const apiFormSlice = createApi({
       }),
     }),
 
-    checkLogin: builder.mutation<void, Logout>({
+    checkLogin: builder.mutation<LoginAuthRedirect, Logout>({
       query: (data) => ({
         url: "/login",
         method: "POST",
         body: data,
       }),
     }),
-
-    getPersonal: builder.query<LoginAuthRedirect, void>({
-      query: () => ({
-        url: "/personal",
-      }),
-    }),
   }),
 });
 
-export const {
-  useCreateNewUserMutation,
-  useCheckLoginMutation,
-  useLazyGetPersonalQuery,
-} = apiFormSlice;
+export const { useCreateNewUserMutation, useCheckLoginMutation } = apiFormSlice;

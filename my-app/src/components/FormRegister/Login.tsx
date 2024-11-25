@@ -12,7 +12,7 @@ import { useEffect } from "react";
 
 function Login() {
   const navigate = useNavigate();
-  const [checkLogin, { isLoading, isError, isSuccess, error }] =
+  const [checkLogin, { isLoading, isError, isSuccess, error, data }] =
     useCheckLoginMutation();
   const {
     register,
@@ -32,10 +32,16 @@ function Login() {
   }
 
   useEffect(() => {
-    if (isSuccess) {
-      navigate("/personal");
+    if (data) {
+      if (isSuccess && data.msg !== "/admin") {
+        navigate("/personal");
+      }
+
+      if (isSuccess && data.msg === "/admin") {
+        navigate("/admin");
+      }
     }
-  }, [isSuccess]);
+  }, [isSuccess, data]);
 
   return (
     <section style={{ gridColumn: "1/13" }}>

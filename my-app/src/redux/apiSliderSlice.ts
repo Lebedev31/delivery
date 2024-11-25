@@ -8,7 +8,26 @@ export const apiSliderSlice = createApi({
     getAll: builder.query<SliderResponseData, void>({
       query: () => "/getAll",
     }),
+    createSlide: builder.mutation<string, FormData>({
+      query: (data) => ({
+        url: "/createSlide",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    updateSlide: builder.mutation<string, FormData>({
+      query: (data) => ({
+        url: "/updateSlide",
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllQuery } = apiSliderSlice;
+export const {
+  useGetAllQuery,
+  useCreateSlideMutation,
+  useUpdateSlideMutation,
+} = apiSliderSlice;

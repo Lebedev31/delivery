@@ -12,6 +12,7 @@ import registerSocailRouter from "./routes/registerSocialRouter";
 import setupGoogleStrategy, {
   setupYandexStrategy,
 } from "./config/passportConfig";
+import personalRouter from "./routes/personalRouter";
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ app.use("/apiSlider", sliderRouter);
 app.use("/category", categoryRouter);
 app.use("/form", formRouter);
 app.use("/auth", registerSocailRouter);
+app.use("/personal", personalRouter);
 
 app.listen(port, () => {
   console.log(`Сервер на порту ${port} запущен`);

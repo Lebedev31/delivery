@@ -1,0 +1,59 @@
+.admin-slider {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Две колонки равной ширины */
+  gap: 30px;
+  margin-top: 20px;
+
+  .admin-slider-item {
+    height: 300px;
+    position: relative;
+    transition: transform 0.3s ease;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .admin-slider-delete {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(183, 0, 0, 1);
+      box-shadow: 0px 10px 31px 0px rgba(15, 15, 17, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: black;
+    }
+  }
+
+  .admin-slider-item:hover {
+    transform: scale(1.02);
+  }
+
+  .admin-slider-push {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(208, 208, 224, 0.7);
+    position: relative;
+    .admin-slider-file {
+      width: 10px;
+      height: 10px;
+      opacity: 0;
+      position: absolute;
+    }
+  }
+
+  .admin-slider-form {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    .admin-slider-text {
+      background-color: white;
+    }
+  }
+}

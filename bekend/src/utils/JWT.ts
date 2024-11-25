@@ -6,8 +6,8 @@ const secret = process.env.JWT_SECRET as string;
 
 function JWT(user: INewUser): string {
   const payload = {
-    userEmail: user.email,
-    userName: user.name,
+    email: user.email,
+    name: user.name,
   };
 
   const jwtSign = jwt.sign(payload, secret, { expiresIn: "1h" });
@@ -17,7 +17,7 @@ function JWT(user: INewUser): string {
 
 export function createCookie(res: Response, token: string) {
   res.cookie("token", token, {
-    //  httpOnly: true,
+    httpOnly: true,
     maxAge: 60 * 60 * 1000,
     secure: false,
     //  sameSite: "strict",

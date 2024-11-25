@@ -17,6 +17,9 @@ import FormRegister from "../FormRegister/FormRegiter";
 import Login from "../FormRegister/Login";
 import PersonalAccount from "../PersonalAccount/PersonalAccount";
 import Payment from "../Payment/Payment";
+import AdminPanel from "../AdminPanel/AdminPanel";
+import AdminSlider from "../AdminPanel/AdminBlock/AdminSlider/AdminSlider";
+import AdminBlock from "../AdminPanel/AdminBlock/AdminBlock";
 
 function App() {
   const active = useSelector((state: RootState) => state.main.isActive);
@@ -30,7 +33,6 @@ function App() {
       document.body.style.overflow = "auto";
     }
   }, [active]);
-  console.log(document.cookie);
   return (
     <div className="container">
       <Router>
@@ -60,6 +62,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/personal" element={<PersonalAccount />} />
           <Route path="/payment" element={<Payment />} />
+          {/* Вложенные маршруты для админ панели */}
+          <Route path="/admin" element={<AdminPanel />}>
+            <Route index element={<AdminBlock />} />
+            <Route path="admin-slider" element={<AdminSlider />} />
+          </Route>
         </Routes>
       </Router>
     </div>

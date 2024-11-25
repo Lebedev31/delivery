@@ -9,6 +9,7 @@ import {
   BadRequestError,
   BaseCustomError,
   NotFoundError,
+  UnauthorizedError,
 } from "../error/errorBase";
 import JWT from "../utils/JWT";
 import { ErrorCodeEnum } from "../error/errorCode";
@@ -90,7 +91,13 @@ class UserController extends BaseController implements IController {
         const err = new NotFoundError();
         res.status(err.statusCode).json(err);
       } else {
+        const isEmailAdmin = user[0].email === process.env.ADMIN__EMAIL;
         const isMatch = await bcrypt.compare(password, user[0].password);
+        if (isEmailAdmin && isMatch) {
+          const token = JWT(user[0]);
+          createCookie(res, token);
+          res.status(200).json({ msg: "/admin" });
+        }
         if (isMatch) {
           const token = JWT(user[0]);
           createCookie(res, token);
