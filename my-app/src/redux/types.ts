@@ -13,7 +13,7 @@ export interface Slider {
 }
 
 export type OptionalSlider = Omit<Partial<Slider>, "_id" | "imgPath"> & {
-  file: File | null;
+  file?: File | null;
 };
 
 export type SliderResponseData = {

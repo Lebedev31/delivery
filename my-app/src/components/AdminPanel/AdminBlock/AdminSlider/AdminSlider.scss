@@ -28,6 +28,26 @@
       right: 10px;
       background-color: black;
     }
+
+    .admin-slider-update-form {
+      position: absolute;
+      top: 0;
+      visibility: hidden;
+      height: 0;
+      transition: 0.5s all ease;
+      left: 20px;
+    }
+
+    .admin-active {
+      visibility: visible;
+    }
+
+    .admin-mouse-enter {
+      height: 100px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+    }
   }
 
   .admin-slider-item:hover {

@@ -1,6 +1,6 @@
 import "./AdminSlider.scss";
 import { TextField, Button } from "@mui/material";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   useCreateSlideMutation,
   useUpdateSlideMutation,
@@ -8,30 +8,71 @@ import {
 import { OptionalSlider } from "../../../../redux/types";
 
 function AdminSliderForm({ flag }: { flag: boolean }) {
-  const [file, setFile] = useState<File | null>(null);
+  const arrayPropertyForm: string[] = [
+    "description",
+    "title",
+    "weight",
+    "price",
+    "image",
+  ];
+  const descriptionRef = useRef<HTMLInputElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const weightRef = useRef<HTMLInputElement>(null);
+  const priceRef = useRef<HTMLInputElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
   const [createSlide] = useCreateSlideMutation();
   const [updateSlide] = useUpdateSlideMutation();
+  const [inputValue, setInputValue] = useState<OptionalSlider>({
+    description: "",
+    title: "",
+    weight: "",
+    price: "",
+    file: null,
+  });
+  const valuesInput = Object.values(inputValue);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-    if (selectedFile) {
-      setFile(selectedFile);
+  const unionValue = (): void => {
+    setInputValue({
+      description: descriptionRef.current?.value,
+      title: titleRef.current?.value,
+      weight: titleRef.current?.value,
+      price: priceRef.current?.value,
+      file: fileRef.current?.files?.[0],
+    });
+  };
+
+  const checkEmptyFormData = (form: FormData): boolean => {
+    const values = Array.from(form.values());
+    const findNull = values.find((item) => item === null || item === "");
+    if (findNull === undefined && values.length === valuesInput.length) {
+      return true;
+    } else {
+      return false;
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file) {
-      return;
-    }
+    console.log(7);
     const formData = new FormData();
-    formData.append("image", file);
+    arrayPropertyForm.forEach((item, index) => {
+      if (valuesInput[index]) {
+        formData.append(item, valuesInput[index] as string | Blob);
+      }
+    });
 
     if (flag) {
-      try {
-        createSlide(formData).unwrap();
-      } catch (error) {
-        console.log(error);
+      console.log(6);
+      const checkPOST = checkEmptyFormData(formData);
+      console.log(checkPOST);
+      if (checkPOST) {
+        try {
+          createSlide(formData).unwrap();
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        alert("Заполните полностью данные");
       }
     }
 
@@ -52,6 +93,7 @@ function AdminSliderForm({ flag }: { flag: boolean }) {
         variant="filled"
         fullWidth
         className="admin-slider-text"
+        inputRef={titleRef}
       />
 
       <TextField
@@ -61,6 +103,7 @@ function AdminSliderForm({ flag }: { flag: boolean }) {
         type="number"
         fullWidth
         className="admin-slider-text"
+        inputRef={priceRef}
       />
 
       <TextField
@@ -70,6 +113,7 @@ function AdminSliderForm({ flag }: { flag: boolean }) {
         type="number"
         fullWidth
         className="admin-slider-text"
+        inputRef={weightRef}
       />
 
       <TextField
@@ -80,11 +124,14 @@ function AdminSliderForm({ flag }: { flag: boolean }) {
         fullWidth
         rows={2}
         className="admin-slider-text"
+        inputRef={descriptionRef}
       />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         {" "}
-        <input type="file" accept="image/*" onChange={handleFileChange} />
-        <Button type="submit">Отправить</Button>
+        <input type="file" accept="image/*" ref={fileRef} />
+        <Button onClick={unionValue} type="submit">
+          Отправить
+        </Button>
       </div>
     </form>
   );
