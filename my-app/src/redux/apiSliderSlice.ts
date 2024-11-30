@@ -23,6 +23,13 @@ export const apiSliderSlice = createApi({
         body: data,
       }),
     }),
+
+    deleteSlide: builder.mutation<string, string>({
+      query: (id) => ({
+        url: `/deleteSlide${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -30,4 +37,5 @@ export const {
   useGetAllQuery,
   useCreateSlideMutation,
   useUpdateSlideMutation,
+  useDeleteSlideMutation,
 } = apiSliderSlice;

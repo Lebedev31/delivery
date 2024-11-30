@@ -47,4 +47,38 @@ export class BaseServices<T extends object> implements IServices<T> {
       throw error;
     }
   }
+
+  async update(id: string, body: Partial<T>): Promise<T> {
+    try {
+      const updateSlide = await this.model.updateOne(
+        { _id: id },
+        { $set: body },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+      console.log(updateSlide);
+      return updateSlide as T;
+    } catch (error) {
+      if (error instanceof Error) {
+        const mongoErr = examinationMongoError(error);
+        throw mongoErr;
+      }
+      throw error;
+    }
+  }
+
+  async delete(id: string): Promise<void> {
+    try {
+      const deleteItem = await this.model.deleteOne({ _id: id });
+    } catch (error) {
+      if (error instanceof Error) {
+        const mongoErr = examinationMongoError(error);
+        throw mongoErr;
+      }
+      throw error;
+    }
+  }
 }

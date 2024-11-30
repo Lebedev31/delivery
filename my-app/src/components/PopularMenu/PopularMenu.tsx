@@ -9,7 +9,7 @@ import PopularBlock from "./PopularBlock";
 import { useLocation } from "react-router-dom";
 
 function PopularMenu() {
-  const { data, isLoading, error } = useGetAllQuery();
+  const { data, isLoading, isError } = useGetAllQuery();
   const [dataArray, setDataArray] = useState<PopularFood[]>([]);
   const location = useLocation();
   const { hash } = location;
@@ -52,7 +52,7 @@ function PopularMenu() {
     return <CircularProgress size={60} color="secondary" />;
   }
 
-  if (error) {
+  if (isError) {
     return <ErrorContainer />;
   }
 

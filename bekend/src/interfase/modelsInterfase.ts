@@ -4,6 +4,7 @@ export interface ISliderCollection {
   price: string;
   weight: string;
   title: string;
+  _id?: string;
 }
 
 export interface IPopularFoods extends ISliderCollection {

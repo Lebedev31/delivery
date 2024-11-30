@@ -12,7 +12,7 @@ export interface Slider {
   price: string;
 }
 
-export type OptionalSlider = Omit<Partial<Slider>, "_id" | "imgPath"> & {
+export type OptionalSlider = Omit<Partial<Slider>, "imgPath"> & {
   file?: File | null;
 };
 

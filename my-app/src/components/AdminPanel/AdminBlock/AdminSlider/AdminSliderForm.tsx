@@ -7,37 +7,54 @@ import {
 } from "../../../../redux/apiSliderSlice";
 import { OptionalSlider } from "../../../../redux/types";
 
-function AdminSliderForm({ flag }: { flag: boolean }) {
+type AdminSliderFormProps = {
+  flag: boolean;
+  _id: string | "none";
+  refetch: () => void;
+};
+
+function AdminSliderForm({ flag, _id, refetch }: AdminSliderFormProps) {
   const arrayPropertyForm: string[] = [
     "description",
     "title",
     "weight",
     "price",
     "image",
+    "_id",
   ];
   const descriptionRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const weightRef = useRef<HTMLInputElement>(null);
   const priceRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
-  const [createSlide] = useCreateSlideMutation();
-  const [updateSlide] = useUpdateSlideMutation();
+  const [createSlide, { isSuccess: createIsSuccess }] =
+    useCreateSlideMutation();
+  const [updateSlide, { isSuccess: updateIsSuccess }] =
+    useUpdateSlideMutation();
   const [inputValue, setInputValue] = useState<OptionalSlider>({
     description: "",
     title: "",
     weight: "",
     price: "",
     file: null,
+    _id,
   });
   const valuesInput = Object.values(inputValue);
+
+  useEffect(() => {
+    if (updateIsSuccess || createIsSuccess) {
+      refetch();
+    }
+  }, [updateIsSuccess, createIsSuccess]);
 
   const unionValue = (): void => {
     setInputValue({
       description: descriptionRef.current?.value,
       title: titleRef.current?.value,
-      weight: titleRef.current?.value,
+      weight: weightRef.current?.value,
       price: priceRef.current?.value,
       file: fileRef.current?.files?.[0],
+      _id,
     });
   };
 
@@ -53,7 +70,6 @@ function AdminSliderForm({ flag }: { flag: boolean }) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(7);
     const formData = new FormData();
     arrayPropertyForm.forEach((item, index) => {
       if (valuesInput[index]) {
@@ -62,12 +78,12 @@ function AdminSliderForm({ flag }: { flag: boolean }) {
     });
 
     if (flag) {
-      console.log(6);
       const checkPOST = checkEmptyFormData(formData);
-      console.log(checkPOST);
+
       if (checkPOST) {
         try {
           createSlide(formData).unwrap();
+          console.log(24);
         } catch (error) {
           console.log(error);
         }

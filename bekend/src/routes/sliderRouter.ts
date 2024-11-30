@@ -14,8 +14,15 @@ sliderRouter.post(
   imgController.create.bind(imgController)
 );
 
-sliderRouter.patch("/updateSlide");
+sliderRouter.patch(
+  "/updateSlide",
+  upload.single("image"),
+  imgController.update.bind(imgController)
+);
 
-sliderRouter.delete("deleteSlide");
+sliderRouter.delete(
+  "/deleteSlide:id",
+  imgController.delete.bind(imgController)
+);
 
 export default sliderRouter;
