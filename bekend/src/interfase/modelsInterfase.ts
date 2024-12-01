@@ -20,4 +20,6 @@ export interface INewUser {
   email: string;
   password: string;
   dateOfBirth: string;
+  avatar?: string;
+  _id?: string
 }

@@ -49,6 +49,8 @@ export class BaseServices<T extends object> implements IServices<T> {
   }
 
   async update(id: string, body: Partial<T>): Promise<T> {
+
+    console.log(body);
     try {
       const updateSlide = await this.model.updateOne(
         { _id: id },

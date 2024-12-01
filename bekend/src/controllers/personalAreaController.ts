@@ -3,7 +3,7 @@ import { Response, Request, NextFunction } from "express";
 import NewUserSchema from "../models/NewUser";
 import BaseController from "./baseController";
 import { IController } from "../interfase/controllerInterface";
-import { UnauthorizedError } from "../error/errorBase";
+import { UnauthorizedError, BadRequestError } from "../error/errorBase";
 import { ErrorCodeEnum } from "../error/errorCode";
 
 class PersonalArea extends BaseController implements IController {
@@ -16,15 +16,46 @@ class PersonalArea extends BaseController implements IController {
       } else {
         const userModel = new BaseServices(NewUserSchema);
         const user = await userModel.getId(email, "email");
+        const isAvatar = user[0].avatar === undefined ? false : true; 
 
         if (user.length > 0) {
           const info = {
-            email: user[0].email,
             name: user[0].name,
+            _id: user[0]._id,
+            dateOfBirth: user[0].dateOfBirth,
+            ...(isAvatar ? {avatar: user[0].avatar} : {})
           };
-          res.status(200).json(info);
+          this.sendRes(res, 200, info);
         }
       }
+    } catch (error) {
+      if (error instanceof Error) {
+        this.handleError(error, res);
+      }
+    }
+  }
+
+  async updateAvatar(req: Request, res: Response, next?: NextFunction): Promise<void> {
+    try {
+      const id = req.body.id;
+      console.log(id);
+      if (!id) {
+        throw new Error('No user ID provided');
+      }
+
+      const userModel = new BaseServices(NewUserSchema);
+      const avatarPath = req.file?.filename;
+      if (!avatarPath) {
+        const error = new BadRequestError();
+        res.status(error.statusCode).json({ msg: 'Нет аватарки' });
+      }
+   
+    const result =  await userModel.update(
+        id,
+        { avatar: `img/${avatarPath}` }
+      );
+    console.log(result);
+      this.sendRes(res, 200, { msg: 'Аватар обновлен' });
     } catch (error) {
       if (error instanceof Error) {
         this.handleError(error, res);

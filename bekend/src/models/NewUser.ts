@@ -19,6 +19,10 @@ const NewUserSchema = new Schema<INewUser>({
   dateOfBirth: {
     type: String,
   },
+
+  avatar: {
+    type: String,
+  },
 });
 
 export default model("User", NewUserSchema, "User");

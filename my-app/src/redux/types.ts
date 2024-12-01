@@ -127,3 +127,22 @@ export type User = {
 export type ResponseUser = {
   data: User;
 };
+
+export interface PersonalResponse {
+  status: number;
+  data: PersonalInfo
+}
+
+export type PersonalInfo = {
+  _id: string;
+  name: string;
+  dateOfBirth: string;
+  avatar?: string;
+};
+
+export interface AvatarResponse {
+  status: number;
+  data: {
+    msg: string;
+  };
+}

@@ -85,7 +85,6 @@ export class ImgController extends BaseController implements IController {
       const isFile = file ? true : false;
       const deletePropertyId = Object.assign({}, updateSlide);
       delete deletePropertyId._id;
-
       const updateObject: Partial<ISliderCollection> = {
         ...deletePropertyId,
         ...(isFile ? { imgPath: "img/" + file?.filename } : {}),
