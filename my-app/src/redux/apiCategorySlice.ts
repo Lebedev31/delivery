@@ -8,7 +8,11 @@ export const apiCategorySlice = createApi({
     getAll: builder.query<CategoryMenuResponseData, string>({
       query: (id) => id,
     }),
+
+    getAllSearchNameFood: builder.query<CategoryMenuResponseData, string>({
+      query: (id) => `/getAllSearchName${id}`,
+    }),
   }),
 });
 
-export const { useGetAllQuery } = apiCategorySlice;
+export const { useGetAllQuery, useLazyGetAllSearchNameFoodQuery } = apiCategorySlice;

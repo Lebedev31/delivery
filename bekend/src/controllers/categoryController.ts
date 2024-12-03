@@ -5,13 +5,11 @@ import { IController } from "../interfase/controllerInterface";
 import BaseController from "./baseController";
 import { ICategoryFood } from "../interfase/modelsInterfase";
 import { BaseServices } from "../services/baseServices";
+import { BadRequestError } from "../error/errorBase";
 
-type RequestParam = {
-  id: string;
-};
 
 class CategoryFoodController extends BaseController implements IController {
-  async read(req: Request<RequestParam>, res: Response): Promise<void> {
+  async read(req: Request, res: Response): Promise<void> {
     if (!req.params.id) {
       res.status(ErrorCodeEnum.BAD_REQUEST).json({ msg: "Неправильный id" });
     }
@@ -27,6 +25,27 @@ class CategoryFoodController extends BaseController implements IController {
         this.handleError(error, res);
       }
     }
+  }
+
+  async searchNameFood(req: Request, res: Response): Promise<void> {
+     const id = req.params.id;
+     console.log(id)
+     if(!id){
+       const error = new BadRequestError();
+       res.status(error.statusCode).json({ msg: "Неправильный id" });
+     }
+
+     try {
+      const categorySercvices = new BaseServices(CategoryFoodSchema);
+      const result = await categorySercvices.searchGetAll(id);
+      this.sendRes(res, 200, result);
+      
+     } catch (error) {
+      if (error instanceof Error) {
+        this.handleError(error, res);
+      }
+     }
+  
   }
 }
 

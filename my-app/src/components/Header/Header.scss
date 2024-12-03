@@ -146,6 +146,15 @@
     align-items: center;
     justify-content: space-between;
 
+    .header_s{
+      position: relative;
+
+      .header__s-active{
+        visibility: visible !important;
+        width: 250px !important;
+      }
+    }
+
     .header__basket-yelloy-box {
       width: 13px;
       height: 13px;

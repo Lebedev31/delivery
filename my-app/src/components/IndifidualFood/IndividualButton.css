@@ -1,0 +1,69 @@
+.individual__button {
+  width: 81px;
+  height: 42px;
+  border-bottom: 1px solid rgb(158, 162, 170);
+  border-top: 1px solid rgb(158, 162, 170);
+  position: relative;
+}
+.individual__button .border__right::before,
+.individual__button .border__right::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  background-color: rgb(158, 162, 170);
+  right: 0;
+}
+.individual__button .border__right::before {
+  top: 0;
+  height: calc(50% - 9px);
+}
+.individual__button .border__right::after {
+  bottom: 0;
+  height: calc(50% - 9px);
+}
+.individual__button .border__left::before,
+.individual__button .border__left::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  background-color: rgb(158, 162, 170);
+  left: 0;
+}
+.individual__button .border__left::before {
+  top: 0;
+  height: calc(50% - 9px);
+}
+.individual__button .border__left::after {
+  bottom: 0;
+  height: calc(50% - 9px);
+}
+.individual__button .individual__center {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(158, 162, 170);
+}
+.individual__button .individual__center p:nth-child(1) {
+  cursor: pointer;
+  width: 11px;
+  height: 11px;
+  transform: translateX(-4px) translateY(-3px);
+}
+.individual__button .individual__center p:nth-child(1) svg {
+  width: 100%;
+  height: 100%;
+}
+.individual__button .individual__center p:nth-child(2) {
+  font-size: 13px;
+}
+.individual__button .individual__center p:nth-child(3) {
+  cursor: pointer;
+  width: 11px;
+  height: 11px;
+  transform: translateX(4px) translateY(-3px);
+}
+.individual__button .individual__center p:nth-child(3) svg {
+  width: 100%;
+  height: 100%;
+}/*# sourceMappingURL=IndividualButton.css.map */

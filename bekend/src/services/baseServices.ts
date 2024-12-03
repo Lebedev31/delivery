@@ -50,7 +50,6 @@ export class BaseServices<T extends object> implements IServices<T> {
 
   async update(id: string, body: Partial<T>): Promise<T> {
 
-    console.log(body);
     try {
       const updateSlide = await this.model.updateOne(
         { _id: id },
@@ -60,8 +59,6 @@ export class BaseServices<T extends object> implements IServices<T> {
           runValidators: true,
         }
       );
-
-      console.log(updateSlide);
       return updateSlide as T;
     } catch (error) {
       if (error instanceof Error) {
@@ -83,4 +80,25 @@ export class BaseServices<T extends object> implements IServices<T> {
       throw error;
     }
   }
+
+  async searchGetAll(id: string): Promise<T[] | []> {
+
+     try {
+
+      const searchCollection = await this.model.find({
+        name: { $regex: id, $options: "i" },
+      }).lean() as T[];
+
+      console.log(searchCollection);
+      return searchCollection.length ? searchCollection : [];
+      
+     } catch (error) {
+      if (error instanceof Error) {
+        const mongoErr = examinationMongoError(error);
+        throw mongoErr;
+      }
+      throw error;
+     }
+  }
+
 }

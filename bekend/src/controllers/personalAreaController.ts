@@ -5,6 +5,7 @@ import BaseController from "./baseController";
 import { IController } from "../interfase/controllerInterface";
 import { UnauthorizedError, BadRequestError } from "../error/errorBase";
 import { ErrorCodeEnum } from "../error/errorCode";
+import {deleteFile} from '../utils/deleteImg';
 
 class PersonalArea extends BaseController implements IController {
   async read(req: Request, res: Response, next?: NextFunction): Promise<void> {
@@ -38,23 +39,28 @@ class PersonalArea extends BaseController implements IController {
   async updateAvatar(req: Request, res: Response, next?: NextFunction): Promise<void> {
     try {
       const id = req.body.id;
-      console.log(id);
       if (!id) {
-        throw new Error('No user ID provided');
+        const error = new BadRequestError();
+        res.status(error.statusCode).json({ msg: 'Нет id' });
       }
 
       const userModel = new BaseServices(NewUserSchema);
       const avatarPath = req.file?.filename;
+      const searchImg = await userModel.getId(id, "_id").then((res) => res[0].avatar);
+      
+      
       if (!avatarPath) {
         const error = new BadRequestError();
         res.status(error.statusCode).json({ msg: 'Нет аватарки' });
       }
-   
-    const result =  await userModel.update(
+       const result = await userModel.update(
         id,
         { avatar: `img/${avatarPath}` }
       );
-    console.log(result);
+
+      if (searchImg) {
+        deleteFile(searchImg);
+      }
       this.sendRes(res, 200, { msg: 'Аватар обновлен' });
     } catch (error) {
       if (error instanceof Error) {

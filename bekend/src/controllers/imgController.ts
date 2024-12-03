@@ -5,6 +5,7 @@ import { IController } from "../interfase/controllerInterface";
 import { BaseServices } from "../services/baseServices";
 import { ISliderCollection } from "../interfase/modelsInterfase";
 import { BadRequestError } from "../error/errorBase";
+import { deleteFile } from "../utils/deleteImg";
 
 export class ImgController extends BaseController implements IController {
   async read(req: Request, res: Response, next?: NextFunction): Promise<void> {
@@ -89,15 +90,21 @@ export class ImgController extends BaseController implements IController {
         ...deletePropertyId,
         ...(isFile ? { imgPath: "img/" + file?.filename } : {}),
       };
-      if (updateSlide._id) {
-        const updateServices = new BaseServices(SliderShema);
+      const updateServices = new BaseServices(SliderShema);
 
+     const searchImg = isFile ? await updateServices.getId(updateSlide._id as string, "_id")
+                                .then((res) => res[0].imgPath) : null;
+      if (updateSlide._id) {
+       
         const updateSlider = await updateServices.update(
           updateSlide._id,
           updateObject
         );
 
         if (updateSlider) {
+          if(searchImg) {
+            deleteFile(searchImg);
+          }
           this.sendRes(res, 200, "Слайд обновлен");
         }
       }
@@ -120,8 +127,14 @@ export class ImgController extends BaseController implements IController {
 
     try {
       const deleteServices = new BaseServices(SliderShema);
+      const searchImg = await deleteServices.getId(req.params.id as string, "_id")
+                                .then((res) => res[0].imgPath);
+      
       if (req.params) {
         const del = await deleteServices.delete(req.params.id);
+        if(searchImg) {
+          deleteFile(searchImg);
+        }
         this.sendRes(res, 200, "Пользователь удален");
       }
     } catch (error) {

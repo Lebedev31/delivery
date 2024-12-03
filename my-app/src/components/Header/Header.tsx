@@ -8,12 +8,17 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import img1 from "../../img/галочка.png";
 import AddinationalMenu from "./AddinationalMenu";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLazyAuthPersonalQuery } from "../../redux/apiPersonalAreaSlice";
 import { UniversalRTKError, standartError } from "../../redux/types";
+import { useLazyGetAllSearchNameFoodQuery } from "../../redux/apiCategorySlice";
+
 
 function Header() {
+  const [triggerSearch, { data: searchData, isLoading: searchIsLoading }] = useLazyGetAllSearchNameFoodQuery();
+  const [isSearch, setIsSearch] = useState(false);
+  const [parseValue, setParseValue] = useState("");
   const [trigger, { isSuccess, data, isError, error }] =
     useLazyAuthPersonalQuery();
   const [redirect, setRedirect] = useState("");
@@ -28,6 +33,8 @@ function Header() {
 
   const categoryArray1 = ["Горячие блюда", "Супы", "Хинкали"];
   const categoryArray2 = ["Холодные закуски", "Салаты", "Соусы"];
+   
+  console.log(searchData);
 
   async function handerClick() {
     try {
@@ -57,6 +64,32 @@ function Header() {
       navigate(redirect);
     }
   }, [isError, isSuccess, redirect]);
+
+  function foodChangeParse(e:React.ChangeEvent<HTMLInputElement>){
+    const value = e.target.value;
+    setParseValue(value);
+  }
+
+  useEffect(() => {
+    console.log(parseValue);
+    let timeoutId: NodeJS.Timeout;
+    if(parseValue.length % 2 === 0 && parseValue.length !== 0){
+      timeoutId = setTimeout(() => {
+        try {
+          triggerSearch(parseValue).unwrap();
+        } catch (error) {
+           console.log(error);
+        }
+       
+      }, 500)
+    }
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    }
+  
+  }, [parseValue]);
 
   return (
     <header className={`header ${active ? "header__active" : ""}`}>
@@ -109,23 +142,31 @@ function Header() {
       </nav>
 
       <div className="header__info">
-        <div className="header_s">
-          <svg
+        <div className="header_s" >
+          <InputComponent placeholder="Поиск" props={{ width: "0px", position:"absolute", 
+                                                      top:"-8px",
+                                                      transform:"translateX(-85%)",
+                                                      visibility:"hidden", 
+                                                      transition:"all 0.3s ease"}}
+                                                      value={parseValue}
+                                                      onChange={foodChangeParse} 
+                                                className={isSearch ? "header__s-active" : ""}/>
+          <svg style={{ zIndex: '5', position: 'relative' }} onClick={() => setIsSearch(!isSearch)}
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            fill="white"
+            fill='white'
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
               fillRule="evenodd"
               clipRule="evenodd"
               d="M9.10932 18.2186C14.1403 18.2186 18.2186 14.1402 18.2186 9.10931C18.2186 4.07838 14.1403 0 9.10932 0C4.07834 0 0 4.07838 0 9.10931C0 14.1402 4.07834 18.2186 9.10932 18.2186ZM9.10932 16.0752C12.9565 16.0752 16.0753 12.9565 16.0753 9.10931C16.0753 5.26212 12.9565 2.14337 9.10932 2.14337C5.26214 2.14337 2.14337 5.26212 2.14337 9.10931C2.14337 12.9565 5.26214 16.0752 9.10932 16.0752Z"
-              fill="white"
+              fill={isSearch ? "black" : "white"}
             />
             <path
               d="M15.4475 13.9319L24 22.4844L22.4844 24L13.9319 15.4475L15.4475 13.9319Z"
-              fill="white"
+              fill={isSearch ? "black" : "white"}
             />
           </svg>
         </div>
@@ -183,7 +224,7 @@ function Header() {
         </div>
       </div>
       <div className={`header__search ${active ? "header__active" : ""}`}>
-        <InputComponent placeholder={"Поиск блюда"} />
+        <InputComponent placeholder={"Поиск блюда"}  value={parseValue}onChange={foodChangeParse}  />
         <svg
           width="24"
           height="24"
